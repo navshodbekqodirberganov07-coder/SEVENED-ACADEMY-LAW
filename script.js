@@ -1,14 +1,5 @@
-// ======================================================
-// SEVENED ACADEMY LAW
-// SUPABASE CLOUD VERSION
-// ======================================================
-
-
-// 1. SUPABASE SOZLAMALARI
-
 const SUPABASE_URL =
   "https://uanbykrpdefnotvzogac.supabase.co";
-
 const SUPABASE_KEY =
   "sb_publishable_eOi21erPMBkoq4LO_HaQDw_uNetqbNR";
 
@@ -27,9 +18,6 @@ const supabaseClient = window.supabase.createClient(
   SUPABASE_KEY
 );
 
-
-// 2. UMUMIY O'ZGARUVCHILAR
-
 let tasks = [];
 let guides = [];
 let currentUser = null;
@@ -38,9 +26,6 @@ let editingGuideId = null;
 let calendarDate = new Date();
 
 const $ = selector => document.querySelector(selector);
-
-
-// 3. YORDAMCHI FUNKSIYALAR
 
 function escapeHTML(value = "") {
   return String(value).replace(/[&<>"']/g, char => ({
@@ -56,10 +41,7 @@ function showMessage(message) {
   alert(message);
 }
 
-
-// ======================================================
-// 4. LOGIN VA RO'YXATDAN O'TISH
-// ======================================================
+// LOGIN VA RO‘YXATDAN O‘TISH
 
 let isSignUpMode = false;
 
@@ -142,44 +124,192 @@ authForm.addEventListener("submit", async event => {
   }
 });
 
-
-// ======================================================
-// 5. FOYDALANUVCHI VA AUTH HOLATI
-// ======================================================
+// FOYDALANUVCHI VA PROFIL
 
 function updateAuthUI(user) {
   currentUser = user;
 
-  document.body.classList.toggle(
-    "authenticated",
-    Boolean(user)
-  );
+  document.body.classList.toggle("authenticated", Boolean(user));
 
   const accountArea = $("#accountArea");
-  accountArea.innerHTML = "";
+  if (accountArea) accountArea.innerHTML = "";
 
-  if (!user) return;
+  const initial =
+    (user?.email || "S").trim().charAt(0).toUpperCase() || "S";
 
-  const email = document.createElement("span");
-  email.className = "account-email";
-  email.textContent = user.email || "Foydalanuvchi";
+  const headerAvatar = $(".header-avatar");
+  const sidebarAvatar = $(".sidebar-bottom .profile-avatar");
+  const sidebarName = $(".sidebar-bottom strong");
+  const sidebarCaption = $(".sidebar-bottom small");
 
-  const logoutButton = document.createElement("button");
-  logoutButton.className = "secondary-button";
-  logoutButton.textContent = "Chiqish";
+  if (headerAvatar) {
+    headerAvatar.textContent = user ? initial : "S";
+    headerAvatar.setAttribute("role", "button");
+    headerAvatar.setAttribute("tabindex", "0");
+    headerAvatar.setAttribute("aria-label", "Profilni ochish");
+    headerAvatar.title = "Profil";
+  }
 
-  logoutButton.addEventListener("click", async () => {
-    const { error } = await supabaseClient.auth.signOut();
+  if (sidebarAvatar) {
+    sidebarAvatar.textContent = user ? initial : "S";
+  }
 
-    if (error) {
-      showMessage(error.message);
-    }
-  });
+  if (sidebarName) {
+    sidebarName.textContent =
+      user?.email || "SEVENED foydalanuvchisi";
+  }
 
-  accountArea.append(email, logoutButton);
+  if (sidebarCaption) {
+    sidebarCaption.textContent =
+      user ? "Shaxsiy profil" : "Tizimga kiring";
+  }
+
+  if (user) ensureProfileModal();
+
+  updateProfileModalContent();
 }
 
+function ensureProfileModal() {
+  if ($("#profileModal")) return;
+
+  const modal = document.createElement("div");
+  modal.id = "profileModal";
+  modal.className = "profile-modal hidden";
+  modal.setAttribute("aria-hidden", "true");
+
+  modal.innerHTML = `
+    <div class="profile-modal-backdrop" data-close-profile></div>
+
+    <section class="profile-modal-card"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="profileModalTitle">
+
+      <button class="icon-button profile-close"
+        id="closeProfile"
+        type="button"
+        aria-label="Yopish">✕</button>
+
+      <div class="profile-modal-avatar" id="profileAvatarLarge">S</div>
+
+      <p class="eyebrow">SEVENED ACADEMY LAW</p>
+
+      <h2 id="profileModalTitle">Shaxsiy profil</h2>
+
+      <div class="profile-detail">
+        <span>Elektron pochta</span>
+        <strong id="profileEmail">—</strong>
+      </div>
+
+      <button class="secondary-button profile-logout"
+        id="profileLogout"
+        type="button">
+        Tizimdan chiqish
+      </button>
+
+    </section>
+  `;
+
+  document.body.appendChild(modal);
+
+  modal.querySelector("#closeProfile")
+    .addEventListener("click", closeProfileModal);
+
+  modal.querySelector("[data-close-profile]")
+    .addEventListener("click", closeProfileModal);
+
+  modal.querySelector("#profileLogout")
+    .addEventListener("click", async () => {
+
+      const button = modal.querySelector("#profileLogout");
+
+      button.disabled = true;
+      button.textContent = "Chiqilmoqda...";
+
+      const { error } = await supabaseClient.auth.signOut();
+
+      if (error) {
+        showMessage("Tizimdan chiqishda xatolik: " + error.message);
+        button.disabled = false;
+        button.textContent = "Tizimdan chiqish";
+        return;
+      }
+
+      closeProfileModal();
+    });
+}
+
+function updateProfileModalContent() {
+  const email = $("#profileEmail");
+  const avatar = $("#profileAvatarLarge");
+
+  if (email) {
+    email.textContent =
+      currentUser?.email || "Foydalanuvchi aniqlanmadi";
+  }
+
+  if (avatar) {
+    avatar.textContent =
+      (currentUser?.email || "S").trim().charAt(0).toUpperCase() || "S";
+  }
+}
+
+function openProfileModal() {
+  if (!currentUser) {
+    showMessage("Profilni ko‘rish uchun avval tizimga kiring.");
+    return;
+  }
+
+  ensureProfileModal();
+  updateProfileModalContent();
+
+  const modal = $("#profileModal");
+
+  modal.classList.remove("hidden");
+  modal.setAttribute("aria-hidden", "false");
+
+  document.body.classList.add("profile-modal-open");
+}
+
+function closeProfileModal() {
+  const modal = $("#profileModal");
+
+  if (!modal) return;
+
+  modal.classList.add("hidden");
+  modal.setAttribute("aria-hidden", "true");
+
+  document.body.classList.remove("profile-modal-open");
+}
+
+function bindProfileTriggers() {
+  const sidebarProfile = $(".sidebar-bottom");
+  const headerAvatar = $(".header-avatar");
+
+  [sidebarProfile, headerAvatar].filter(Boolean).forEach(element => {
+
+    element.style.cursor = "pointer";
+
+    element.addEventListener("click", openProfileModal);
+
+    element.addEventListener("keydown", event => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openProfileModal();
+      }
+    });
+
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") closeProfileModal();
+  });
+}
+
+// SUPABASE AUTH HOLATI
+
 supabaseClient.auth.onAuthStateChange((event, session) => {
+
   updateAuthUI(session?.user || null);
 
   if (event === "SIGNED_IN") {
@@ -196,9 +326,11 @@ supabaseClient.auth.onAuthStateChange((event, session) => {
     renderTasks();
     renderGuides();
   }
+
 });
 
 async function checkExistingSession() {
+
   const { data, error } =
     await supabaseClient.auth.getSession();
 
@@ -217,10 +349,7 @@ async function checkExistingSession() {
   }
 }
 
-
-// ======================================================
-// 6. SANA
-// ======================================================
+// SANA
 
 function setTodayDate() {
   $("#todayDate").textContent =
@@ -231,12 +360,10 @@ function setTodayDate() {
     });
 }
 
-
-// ======================================================
-// 7. VAZIFALARNI CLOUD'DAN YUKLASH
-// ======================================================
+// VAZIFALARNI CLOUD'DAN YUKLASH
 
 async function loadTasks() {
+
   if (!currentUser) {
     tasks = [];
     renderTasks();
@@ -272,12 +399,10 @@ async function loadTasks() {
   }
 }
 
-
-// ======================================================
-// 8. STATISTIKA
-// ======================================================
+// STATISTIKA
 
 function updateStatistics() {
+
   const total = tasks.length;
   const completed = tasks.filter(task => task.done).length;
   const remaining = total - completed;
@@ -297,16 +422,15 @@ function updateStatistics() {
   $("#resultPercent").textContent = percent + "%";
 }
 
-
-// ======================================================
-// 9. VAZIFALARNI KO'RSATISH
-// ======================================================
+// VAZIFALARNI KO‘RSATISH
 
 function renderTasks() {
+
   const list = $("#taskList");
   list.innerHTML = "";
 
   tasks.forEach(task => {
+
     const item = document.createElement("div");
 
     item.className =
@@ -357,10 +481,7 @@ function renderTasks() {
   updateStatistics();
 }
 
-
-// ======================================================
-// 10. VAZIFA FORMASI
-// ======================================================
+// VAZIFA FORMASI
 
 function openTaskForm() {
   $("#taskForm").classList.remove("hidden");
@@ -376,12 +497,10 @@ $("#addTaskButton").addEventListener("click", openTaskForm);
 $("#quickAddTask").addEventListener("click", openTaskForm);
 $("#cancelTask").addEventListener("click", closeTaskForm);
 
-
-// ======================================================
-// 11. YANGI VAZIFANI SAQLASH
-// ======================================================
+// YANGI VAZIFANI SAQLASH
 
 $("#taskForm").addEventListener("submit", async event => {
+
   event.preventDefault();
 
   if (!currentUser) {
@@ -434,12 +553,10 @@ $("#taskForm").addEventListener("submit", async event => {
   }
 });
 
-
-// ======================================================
-// 12. VAZIFA HOLATINI O'ZGARTIRISH
-// ======================================================
+// VAZIFA HOLATINI O‘ZGARTIRISH
 
 $("#taskList").addEventListener("change", async event => {
+
   const checkbox = event.target.closest(
     '[data-action="toggle"]'
   );
@@ -470,12 +587,10 @@ $("#taskList").addEventListener("change", async event => {
   }
 });
 
-
-// ======================================================
-// 13. MUHIMLIK VA O'CHIRISH
-// ======================================================
+// MUHIMLIK VA O‘CHIRISH
 
 $("#taskList").addEventListener("click", async event => {
+
   const button = event.target.closest("button[data-action]");
 
   if (!button || !currentUser) return;
@@ -487,6 +602,7 @@ $("#taskList").addEventListener("click", async event => {
   if (!task) return;
 
   if (button.dataset.action === "star") {
+
     const oldValue = task.important;
     task.important = !oldValue;
 
@@ -506,6 +622,7 @@ $("#taskList").addEventListener("click", async event => {
   }
 
   if (button.dataset.action === "delete") {
+
     if (!confirm("Vazifani o‘chirmoqchimisiz?")) return;
 
     const oldTasks = [...tasks];
@@ -528,14 +645,10 @@ $("#taskList").addEventListener("click", async event => {
       showMessage(error.message);
     }
   }
-});
-
-
-// ======================================================
-// 14. QO'LLANMALARNI CLOUD'DAN YUKLASH
-// ======================================================
+});// QO‘LLANMALARNI CLOUD'DAN YUKLASH
 
 async function loadGuides() {
+
   if (!currentUser) {
     guides = [];
     renderGuides();
@@ -574,12 +687,10 @@ async function loadGuides() {
   }
 }
 
-
-// ======================================================
-// 15. QO'LLANMA EDITORI
-// ======================================================
+// QO‘LLANMA TAHRIRLASH OYNASI
 
 function openGuideEditor(guide = null) {
+
   editingGuideId = guide ? guide.id : null;
 
   $("#guideForm").reset();
@@ -614,12 +725,10 @@ $("#createGuide").addEventListener("click", () => openGuideEditor());
 $("#closeEditor").addEventListener("click", closeGuideEditor);
 $("#cancelGuide").addEventListener("click", closeGuideEditor);
 
-
-// ======================================================
-// 16. MATNLI QO'LLANMANI SAQLASH
-// ======================================================
+// QO‘LLANMANI SAQLASH
 
 $("#guideForm").addEventListener("submit", async event => {
+
   event.preventDefault();
 
   if (!currentUser) {
@@ -657,6 +766,7 @@ $("#guideForm").addEventListener("submit", async event => {
         .update(values)
         .eq("id", editingGuideId)
         .eq("user_id", userId);
+
     } else {
       result = await supabaseClient
         .from("guides")
@@ -682,28 +792,23 @@ $("#guideForm").addEventListener("submit", async event => {
   }
 });
 
-
-// ======================================================
-// 17. FAYL NOMINI XAVFSIZLASHTIRISH
-// ======================================================
+// FAYL NOMINI XAVFSIZ QILISH
 
 function safeFileName(name) {
   return String(name || "guide-file")
     .normalize("NFKD")
-    .replace(/[^\w.\-]+/g, "_")
+    .replace(/[^\w.-]+/g, "_")
     .slice(0, 100) || "guide-file";
 }
 
-
-// ======================================================
-// 18. PDF, WORD VA RASMLARNI YUKLASH
-// ======================================================
+// FAYL YUKLASH
 
 $("#uploadGuide").addEventListener("click", () => {
   $("#guideFile").click();
 });
 
 $("#guideFile").addEventListener("change", async event => {
+
   const files = Array.from(event.target.files || []);
 
   if (!files.length) return;
@@ -721,6 +826,7 @@ $("#guideFile").addEventListener("change", async event => {
   const userId = currentUser.id;
 
   for (const file of files) {
+
     const extension = file.name
       .split(".")
       .pop()
@@ -768,6 +874,7 @@ $("#guideFile").addEventListener("change", async event => {
       if (insertError) throw insertError;
 
     } catch (error) {
+
       if (filePath) {
         await supabaseClient.storage
           .from("guide-files")
@@ -783,16 +890,16 @@ $("#guideFile").addEventListener("change", async event => {
   event.target.value = "";
 });
 
-
-// ======================================================
-// 19. QO'LLANMALARNI KO'RSATISH
-// ======================================================
+// QO‘LLANMALARNI KO‘RSATISH
 
 function renderGuides() {
+
   const list = $("#guideList");
+
   const search = $("#guideSearch").value.trim().toLowerCase();
 
   const filtered = guides.filter(guide => {
+
     const categoryMatch =
       selectedCategory === "Barchasi" ||
       guide.category === selectedCategory;
@@ -806,7 +913,9 @@ function renderGuides() {
   list.innerHTML = "";
 
   filtered.forEach(guide => {
+
     const card = document.createElement("article");
+
     card.className = "guide-card";
 
     const isFile = guide.type === "file";
@@ -820,6 +929,7 @@ function renderGuides() {
         <span class="guide-file-icon">
           ${isFile ? "📎" : "📘"}
         </span>
+
         <span class="muted small">
           ${isFile ? "Fayl" : "Matn"}
         </span>
@@ -834,6 +944,7 @@ function renderGuides() {
       <p>${escapeHTML(description)}</p>
 
       <div class="guide-actions">
+
         <button class="primary-button"
           data-guide-action="open"
           data-id="${escapeHTML(guide.id)}">
@@ -853,6 +964,7 @@ function renderGuides() {
           data-id="${escapeHTML(guide.id)}">
           O‘chirish
         </button>
+
       </div>
     `;
 
@@ -869,12 +981,10 @@ function renderGuides() {
 
 $("#guideSearch").addEventListener("input", renderGuides);
 
-
-// ======================================================
-// 20. KATEGORIYA FILTRI
-// ======================================================
+// KATEGORIYA FILTRI
 
 $("#categoryList").addEventListener("click", event => {
+
   const button = event.target.closest(".category-btn");
 
   if (!button) return;
@@ -888,12 +998,10 @@ $("#categoryList").addEventListener("click", event => {
   renderGuides();
 });
 
-
-// ======================================================
-// 21. QO'LLANMALARNI OCHISH, TAHRIRLASH, O'CHIRISH
-// ======================================================
+// QO‘LLANMALARNI OCHISH, TAHRIRLASH, O‘CHIRISH
 
 $("#guideList").addEventListener("click", async event => {
+
   const button =
     event.target.closest("button[data-guide-action]");
 
@@ -913,11 +1021,13 @@ $("#guideList").addEventListener("click", async event => {
   }
 
   if (action === "delete") {
+
     if (!confirm(
       `"${guide.title}" qo‘llanmasini o‘chirmoqchimisiz?`
     )) return;
 
     try {
+
       if (guide.filePath) {
         const { error: storageError } =
           await supabaseClient.storage
@@ -944,7 +1054,9 @@ $("#guideList").addEventListener("click", async event => {
   }
 
   if (action === "open") {
+
     if (guide.type === "file") {
+
       try {
         const { data, error } =
           await supabaseClient.storage
@@ -973,22 +1085,23 @@ $("#guideList").addEventListener("click", async event => {
   }
 });
 
-
-// ======================================================
-// 22. MATNLI QO'LLANMANI KO'RISH
-// ======================================================
+// MATNLI QO‘LLANMANI KO‘RISH
 
 function openGuideViewer(guide) {
+
   const overlay = document.createElement("div");
+
   overlay.className = "guide-view-overlay";
 
   overlay.innerHTML = `
     <div class="guide-view-box">
+
       <div class="guide-view-header">
         <div>
           <span class="guide-category">
             ${escapeHTML(guide.category)}
           </span>
+
           <h2>${escapeHTML(guide.title)}</h2>
         </div>
 
@@ -996,6 +1109,7 @@ function openGuideViewer(guide) {
       </div>
 
       <div class="guide-view-content"></div>
+
     </div>
   `;
 
@@ -1011,14 +1125,10 @@ function openGuideViewer(guide) {
   overlay.addEventListener("click", event => {
     if (event.target === overlay) overlay.remove();
   });
-}
-
-
-// ======================================================
-// 23. KALENDAR
-// ======================================================
+}// KALENDAR
 
 function renderCalendar() {
+
   const year = calendarDate.getFullYear();
   const month = calendarDate.getMonth();
 
@@ -1036,28 +1146,37 @@ function renderCalendar() {
   ];
 
   weekdays.forEach(day => {
+
     const cell = document.createElement("div");
+
     cell.className = "calendar-cell weekday";
     cell.textContent = day;
+
     grid.appendChild(cell);
   });
 
   const firstDay = new Date(year, month, 1).getDay();
   const offset = (firstDay + 6) % 7;
+
   const daysInMonth =
     new Date(year, month + 1, 0).getDate();
 
   for (let i = 0; i < offset; i++) {
+
     const blank = document.createElement("div");
+
     blank.className = "calendar-cell";
     blank.style.visibility = "hidden";
+
     grid.appendChild(blank);
   }
 
   const now = new Date();
 
   for (let day = 1; day <= daysInMonth; day++) {
+
     const cell = document.createElement("div");
+
     cell.className = "calendar-cell";
     cell.textContent = day;
 
@@ -1083,27 +1202,95 @@ $("#nextMonth").addEventListener("click", () => {
   renderCalendar();
 });
 
+// MENYU — FAQAT TANLANGAN SAHIFANI KO‘RSATISH
 
-// ======================================================
-// 24. MENYU
-// ======================================================
+function showPage(pageId, updateHash = true) {
 
-document.querySelectorAll(".menu-item").forEach(link => {
-  link.addEventListener("click", () => {
-    document.querySelectorAll(".menu-item").forEach(item => {
-      item.classList.remove("active");
-    });
+  const sections = Array.from(
+    document.querySelectorAll("main .section[id]")
+  );
 
-    link.classList.add("active");
+  const target =
+    sections.find(section => section.id === pageId) ||
+    sections.find(section => section.id === "dashboard");
+
+  if (!target) return;
+
+  sections.forEach(section => {
+
+    const isActive = section === target;
+
+    section.classList.toggle("page-visible", isActive);
+    section.classList.toggle("page-hidden", !isActive);
+
+    section.setAttribute("aria-hidden", String(!isActive));
   });
-});
 
+  document.querySelectorAll(".menu-item").forEach(link => {
 
-// ======================================================
-// 25. MA'LUMOTLARNI EKSPORT QILISH
-// ======================================================
+    const isActive =
+      link.getAttribute("href") === "#" + target.id;
+
+    link.classList.toggle("active", isActive);
+
+    if (isActive) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  });
+
+  if (
+    updateHash &&
+    window.location.hash !== "#" + target.id
+  ) {
+    history.replaceState(null, "", "#" + target.id);
+  }
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+function bindPageNavigation() {
+
+  document.querySelectorAll(
+    '.menu-item[href^="#"], .quick-action[href^="#"]'
+  ).forEach(link => {
+
+    link.addEventListener("click", event => {
+
+      const pageId = link.getAttribute("href").slice(1);
+
+      if (!$("#" + CSS.escape(pageId))) return;
+
+      event.preventDefault();
+
+      showPage(pageId);
+    });
+  });
+
+  window.addEventListener("hashchange", () => {
+    showPage(
+      window.location.hash.slice(1) || "dashboard",
+      false
+    );
+  });
+
+  showPage(
+    window.location.hash.slice(1) || "dashboard",
+    false
+  );
+}
+
+bindPageNavigation();
+bindProfileTriggers();
+
+// MA'LUMOTLARNI EKSPORT QILISH
 
 $("#exportData").addEventListener("click", () => {
+
   const data = {
     tasks,
     guides,
@@ -1116,22 +1303,23 @@ $("#exportData").addEventListener("click", () => {
   );
 
   const url = URL.createObjectURL(blob);
+
   const link = document.createElement("a");
 
   link.href = url;
   link.download = "sevened-data.json";
+
   link.click();
 
   URL.revokeObjectURL(url);
 });
 
-
-// ======================================================
-// 26. DASTURNI ISHGA TUSHIRISH
-// ======================================================
+// DASTURNI ISHGA TUSHIRISH
 
 async function initializeApp() {
+
   setTodayDate();
+
   renderTasks();
   renderGuides();
   renderCalendar();
@@ -1141,7 +1329,4 @@ async function initializeApp() {
 
 initializeApp();
 
-
-// ======================================================
 // SEVENED ACADEMY LAW — END
-// ======================================================

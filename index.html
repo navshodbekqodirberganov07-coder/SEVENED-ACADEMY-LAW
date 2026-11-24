@@ -53,41 +53,67 @@
       </div>
 
       <div class="sidebar-label">ASOSIY MENYU</div>
+
       <nav class="menu">
-        <a class="menu-item active" href="#dashboard">🏠 <span>Bosh sahifa</span></a>
-        <a class="menu-item" href="#tasks">☑️ <span>Uy vazifalari</span></a>
-        <a class="menu-item" href="#guides">📚 <span>Mening qo‘llanmalarim</span></a>
-        <a class="menu-item" href="#results">📊 <span>Natijalar</span></a>
-        <a class="menu-item" href="#calendar">🗓️ <span>Kalendar</span></a>
+        <a class="menu-item active" href="#dashboard">
+          🏠 <span>Bosh sahifa</span>
+        </a>
+        <a class="menu-item" href="#tasks">
+          ☑️ <span>Uy vazifalari</span>
+        </a>
+        <a class="menu-item" href="#guides">
+          📚 <span>Mening qo‘llanmalarim</span>
+        </a>
+        <a class="menu-item" href="#results">
+          📊 <span>Natijalar</span>
+        </a>
+        <a class="menu-item" href="#calendar">
+          🗓️ <span>Kalendar</span>
+        </a>
       </nav>
 
       <div class="sidebar-label">BOSHQA</div>
+
       <nav class="menu">
-        <a class="menu-item" href="#settings">⚙️ <span>Sozlamalar</span></a>
-        <a class="menu-item" href="#help">❔ <span>Yordam</span></a>
+        <a class="menu-item" href="#settings">
+          ⚙️ <span>Sozlamalar</span>
+        </a>
+        <a class="menu-item" href="#help">
+          ❔ <span>Yordam</span>
+        </a>
       </nav>
 
-      <div class="sidebar-bottom">
-        <div class="profile-avatar">S</div>
-        <div>
-          <strong>SEVENED foydalanuvchisi</strong>
+      <!-- CHAP PASTDAGI PROFIL -->
+      <button class="sidebar-bottom profile-trigger"
+              id="sidebarProfile" type="button">
+        <span class="profile-avatar" data-user-initial>S</span>
+
+        <span class="profile-copy">
+          <strong id="sidebarProfileName">
+            SEVENED foydalanuvchisi
+          </strong>
           <small>Shaxsiy profil</small>
-        </div>
-      </div>
+        </span>
+
+        <span class="profile-chevron">›</span>
+      </button>
     </aside>
 
     <main class="main-content">
 
+      <!-- YUQORI PANEL -->
       <header class="top-header">
         <div>
           <p class="eyebrow">SEVENED ACADEMY LAW</p>
           <h1>Xush kelibsiz! 👋</h1>
-          <p class="muted">Bugungi rejangiz va natijalaringiz shu yerda.</p>
+          <p class="muted">
+            Bugungi rejangiz va natijalaringiz shu yerda.
+          </p>
         </div>
+
         <div class="header-actions">
           <span class="date-label" id="todayDate"></span>
-          <div class="header-avatar">S</div>
-          <div id="accountArea"></div>
+          <div id="accountArea" class="account-area"></div>
         </div>
       </header>
 
@@ -140,7 +166,9 @@
             <p class="eyebrow">KUNLIK REJA</p>
             <h2>Vazifalarim</h2>
           </div>
-          <button class="primary-button" id="addTaskButton">＋ Yangi vazifa</button>
+          <button class="primary-button" id="addTaskButton">
+            ＋ Yangi vazifa
+          </button>
         </div>
 
         <div class="task-layout">
@@ -148,7 +176,9 @@
             <div class="panel-heading">
               <div>
                 <h3>📋 Bugungi vazifalar</h3>
-                <p class="muted small">Vazifalarni belgilang va rivojlanishingizni kuzating.</p>
+                <p class="muted small">
+                  Vazifalarni belgilang va rivojlanishingizni kuzating.
+                </p>
               </div>
               <span class="count-badge" id="taskCount">0 ta</span>
             </div>
@@ -156,14 +186,22 @@
             <form id="taskForm" class="task-form hidden">
               <input id="taskTitle" type="text"
                      placeholder="Vazifa nomi..." required>
+
               <select id="taskSubject">
                 <option value="Huquq">Huquq</option>
                 <option value="Ona tili">Ona tili</option>
                 <option value="Turk tili">Turk tili</option>
                 <option value="Umumiy">Umumiy</option>
               </select>
-              <button class="primary-button" type="submit">Saqlash</button>
-              <button class="secondary-button" id="cancelTask" type="button">Bekor qilish</button>
+
+              <button class="primary-button" type="submit">
+                Saqlash
+              </button>
+
+              <button class="secondary-button" id="cancelTask"
+                      type="button">
+                Bekor qilish
+              </button>
             </form>
 
             <div id="taskList" class="task-list"></div>
@@ -178,14 +216,18 @@
           <aside class="panel quick-panel">
             <p class="eyebrow">TEZKOR AMALLAR</p>
             <h3>Bugun nimadan boshlaymiz?</h3>
-            <p class="muted small">Kichik qadamlar katta natijalarga olib boradi.</p>
+            <p class="muted small">
+              Kichik qadamlar katta natijalarga olib boradi.
+            </p>
 
             <button class="quick-action" id="quickAddTask">
               ＋ Vazifa qo‘shish <span>→</span>
             </button>
+
             <a class="quick-action" href="#guides">
               📚 Qo‘llanmalarni ochish <span>→</span>
             </a>
+
             <a class="quick-action" href="#results">
               📊 Natijalarni ko‘rish <span>→</span>
             </a>
@@ -204,7 +246,9 @@
           <div>
             <p class="eyebrow">BILIMLAR XAZINASI</p>
             <h2>📚 Mening qo‘llanmalarim</h2>
-            <p class="muted">Barcha bilim va huquqiy materiallaringiz bir joyda.</p>
+            <p class="muted">
+              Barcha bilim va huquqiy materiallaringiz bir joyda.
+            </p>
           </div>
           <span class="count-badge" id="guideCount">0 ta</span>
         </div>
@@ -212,24 +256,38 @@
         <div class="guide-toolbar">
           <input id="guideSearch" type="search"
                  placeholder="🔎 Qo‘llanma nomini qidirish...">
-          <button class="primary-button" id="createGuide">＋ Yangi qo‘llanma yaratish</button>
-          <button class="secondary-button" id="uploadGuide">📁 Fayl yuklash</button>
+
+          <button class="primary-button" id="createGuide">
+            ＋ Yangi qo‘llanma yaratish
+          </button>
+
+          <button class="secondary-button" id="uploadGuide">
+            📁 Fayl yuklash
+          </button>
+
           <input id="guideFile" type="file"
-                 accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" multiple hidden>
+                 accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
+                 multiple hidden>
         </div>
 
         <div class="category-list" id="categoryList">
-          <button class="category-btn selected" data-category="Barchasi">Barchasi</button>
-          <button class="category-btn" data-category="Huquq">Huquq</button>
-          <button class="category-btn" data-category="Qonunchilik">Qonunchilik</button>
-          <button class="category-btn" data-category="Inson huquqlari">Inson huquqlari</button>
-          <button class="category-btn" data-category="Boshqa">Boshqa</button>
+          <button class="category-btn selected"
+                  data-category="Barchasi">Barchasi</button>
+          <button class="category-btn"
+                  data-category="Huquq">Huquq</button>
+          <button class="category-btn"
+                  data-category="Qonunchilik">Qonunchilik</button>
+          <button class="category-btn"
+                  data-category="Inson huquqlari">Inson huquqlari</button>
+          <button class="category-btn"
+                  data-category="Boshqa">Boshqa</button>
         </div>
 
         <div id="guideEditor" class="panel guide-editor hidden">
           <div class="panel-heading">
             <h3 id="editorHeading">Yangi qo‘llanma</h3>
-            <button class="icon-button" id="closeEditor" type="button">✕</button>
+            <button class="icon-button" id="closeEditor"
+                    type="button">✕</button>
           </div>
 
           <form id="guideForm">
@@ -247,11 +305,17 @@
 
             <label for="guideContent">Qo‘llanma matni</label>
             <textarea id="guideContent" rows="8"
-                      placeholder="Bu yerga qo‘llanma matnini yozing..."></textarea>
+                      placeholder="Bu yerga qo‘llanma matnini yozing...">
+            </textarea>
 
             <div class="form-actions">
-              <button class="primary-button" type="submit">Saqlash</button>
-              <button class="secondary-button" id="cancelGuide" type="button">Bekor qilish</button>
+              <button class="primary-button" type="submit">
+                Saqlash
+              </button>
+              <button class="secondary-button" id="cancelGuide"
+                      type="button">
+                Bekor qilish
+              </button>
             </div>
           </form>
         </div>
@@ -271,7 +335,9 @@
           <div>
             <p class="eyebrow">RIVOJLANISH</p>
             <h2>📊 Natijalar</h2>
-            <p class="muted">Vazifalaringiz bo‘yicha umumiy ko‘rsatkichlar.</p>
+            <p class="muted">
+              Vazifalaringiz bo‘yicha umumiy ko‘rsatkichlar.
+            </p>
           </div>
         </div>
 
@@ -280,10 +346,12 @@
             <span class="muted">Bajarilgan vazifalar</span>
             <strong id="resultCompleted">0</strong>
           </div>
+
           <div class="result-number">
             <span class="muted">Bajarilmagan vazifalar</span>
             <strong id="resultRemaining">0</strong>
           </div>
+
           <div class="result-number">
             <span class="muted">Umumiy bajarilish</span>
             <strong id="resultPercent">0%</strong>
@@ -297,7 +365,9 @@
           <div>
             <p class="eyebrow">REJALASHTIRISH</p>
             <h2>🗓️ Kalendar</h2>
-            <p class="muted">Muhim sanalar va muddatlar uchun joy.</p>
+            <p class="muted">
+              Muhim sanalar va muddatlar uchun joy.
+            </p>
           </div>
         </div>
 
@@ -313,10 +383,15 @@
 
       <!-- SOZLAMALAR -->
       <section id="settings" class="section">
-        <div class="section-heading"><h2>⚙️ Sozlamalar</h2></div>
+        <div class="section-heading">
+          <h2>⚙️ Sozlamalar</h2>
+        </div>
+
         <div class="panel">
           <h3>Ma’lumotlarni boshqarish</h3>
-          <p class="muted">Hozirgi vazifalar ushbu brauzerda saqlanadi.</p>
+          <p class="muted">
+            Hozirgi vazifalar ushbu brauzerda saqlanadi.
+          </p>
           <button class="secondary-button" id="exportData">
             Ma’lumotlarni yuklab olish
           </button>
@@ -325,7 +400,10 @@
 
       <!-- YORDAM -->
       <section id="help" class="section">
-        <div class="section-heading"><h2>❔ Yordam</h2></div>
+        <div class="section-heading">
+          <h2>❔ Yordam</h2>
+        </div>
+
         <div class="panel">
           <h3>SEVENED ACADEMY LAW</h3>
           <p class="muted">
@@ -342,8 +420,32 @@
     </main>
   </div>
 
-  <!-- Supabase kutubxonasi -->
+  <!-- SHAXSIY PROFIL OYNASI -->
+  <div class="profile-modal hidden" id="profileModal"
+       role="dialog" aria-modal="true"
+       aria-labelledby="profileModalTitle">
+
+    <div class="profile-modal-card">
+      <button class="icon-button profile-modal-close"
+              id="closeProfile" type="button"
+              aria-label="Yopish">✕</button>
+
+      <div class="profile-modal-avatar" data-user-initial>S</div>
+
+      <p class="eyebrow">SEVENED ACADEMY LAW</p>
+      <h2 id="profileModalTitle">Shaxsiy profil</h2>
+      <p class="muted" id="profileEmail">Foydalanuvchi</p>
+
+      <button class="secondary-button profile-logout"
+              id="profileLogout" type="button">
+        Tizimdan chiqish
+      </button>
+    </div>
+  </div>
+
+  <!-- SUPABASE -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="script.js"></script>
+
 </body>
 </html>
