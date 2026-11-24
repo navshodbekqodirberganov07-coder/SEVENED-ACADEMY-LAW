@@ -1,0 +1,349 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071321">
+  <title>SEVENED ACADEMY LAW</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- LOGIN VA RO‘YXATDAN O‘TISH -->
+  <div id="authScreen" class="auth-screen">
+    <div class="auth-card">
+      <div class="auth-logo">⚖️</div>
+      <p class="eyebrow">SEVENED ACADEMY</p>
+      <h1 id="authTitle">Xush kelibsiz!</h1>
+      <p class="muted">Shaxsiy kabinetingizga kiring.</p>
+
+      <form id="authForm">
+        <label for="authEmail">Elektron pochta</label>
+        <input id="authEmail" type="email"
+               placeholder="email@example.com" required>
+
+        <label for="authPassword">Parol</label>
+        <input id="authPassword" type="password"
+               placeholder="Kamida 8 ta belgi"
+               minlength="8" required>
+
+        <button id="authSubmit" class="primary-button auth-submit"
+                type="submit">Tizimga kirish</button>
+      </form>
+
+      <p id="authMessage" class="auth-message" aria-live="polite"></p>
+
+      <button id="authSwitch" class="auth-switch" type="button">
+        Akkauntingiz yo‘qmi? Ro‘yxatdan o‘ting
+      </button>
+    </div>
+  </div>
+
+  <!-- ASOSIY ILOVA -->
+  <div class="app">
+
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">⚖️</div>
+        <div>
+          <h2>SEVENED</h2>
+          <span>ACADEMY LAW</span>
+        </div>
+      </div>
+
+      <div class="sidebar-label">ASOSIY MENYU</div>
+      <nav class="menu">
+        <a class="menu-item active" href="#dashboard">🏠 <span>Bosh sahifa</span></a>
+        <a class="menu-item" href="#tasks">☑️ <span>Uy vazifalari</span></a>
+        <a class="menu-item" href="#guides">📚 <span>Mening qo‘llanmalarim</span></a>
+        <a class="menu-item" href="#results">📊 <span>Natijalar</span></a>
+        <a class="menu-item" href="#calendar">🗓️ <span>Kalendar</span></a>
+      </nav>
+
+      <div class="sidebar-label">BOSHQA</div>
+      <nav class="menu">
+        <a class="menu-item" href="#settings">⚙️ <span>Sozlamalar</span></a>
+        <a class="menu-item" href="#help">❔ <span>Yordam</span></a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="profile-avatar">S</div>
+        <div>
+          <strong>SEVENED foydalanuvchisi</strong>
+          <small>Shaxsiy profil</small>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+
+      <header class="top-header">
+        <div>
+          <p class="eyebrow">SEVENED ACADEMY LAW</p>
+          <h1>Xush kelibsiz! 👋</h1>
+          <p class="muted">Bugungi rejangiz va natijalaringiz shu yerda.</p>
+        </div>
+        <div class="header-actions">
+          <span class="date-label" id="todayDate"></span>
+          <div class="header-avatar">S</div>
+          <div id="accountArea"></div>
+        </div>
+      </header>
+
+      <!-- BOSH SAHIFA -->
+      <section id="dashboard" class="section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">UMUMIY KO‘RSATKICHLAR</p>
+            <h2>Bugungi holat</h2>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card">
+            <div class="stat-icon blue">📚</div>
+            <p>Jami vazifalar</p>
+            <h2 id="totalTasks">0</h2>
+            <small>Barcha vazifalar</small>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-icon green">✅</div>
+            <p>Bajarildi</p>
+            <h2 id="completedTasks">0</h2>
+            <small>Yakunlangan vazifalar</small>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-icon orange">⏳</div>
+            <p>Qoldi</p>
+            <h2 id="remainingTasks">0</h2>
+            <small>Bajarilishi kerak</small>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-icon gold">⭐</div>
+            <p>Bajarilish darajasi</p>
+            <h2 id="progressPercent">0%</h2>
+            <div class="progress-track">
+              <div id="progressBar" class="progress-fill"></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- VAZIFALAR -->
+      <section id="tasks" class="section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">KUNLIK REJA</p>
+            <h2>Vazifalarim</h2>
+          </div>
+          <button class="primary-button" id="addTaskButton">＋ Yangi vazifa</button>
+        </div>
+
+        <div class="task-layout">
+          <div class="panel task-panel">
+            <div class="panel-heading">
+              <div>
+                <h3>📋 Bugungi vazifalar</h3>
+                <p class="muted small">Vazifalarni belgilang va rivojlanishingizni kuzating.</p>
+              </div>
+              <span class="count-badge" id="taskCount">0 ta</span>
+            </div>
+
+            <form id="taskForm" class="task-form hidden">
+              <input id="taskTitle" type="text"
+                     placeholder="Vazifa nomi..." required>
+              <select id="taskSubject">
+                <option value="Huquq">Huquq</option>
+                <option value="Ona tili">Ona tili</option>
+                <option value="Turk tili">Turk tili</option>
+                <option value="Umumiy">Umumiy</option>
+              </select>
+              <button class="primary-button" type="submit">Saqlash</button>
+              <button class="secondary-button" id="cancelTask" type="button">Bekor qilish</button>
+            </form>
+
+            <div id="taskList" class="task-list"></div>
+
+            <div id="emptyTasks" class="empty-state">
+              <div>📝</div>
+              <h3>Hozircha vazifalar yo‘q</h3>
+              <p>Yangi vazifa qo‘shish orqali rejangizni boshlang.</p>
+            </div>
+          </div>
+
+          <aside class="panel quick-panel">
+            <p class="eyebrow">TEZKOR AMALLAR</p>
+            <h3>Bugun nimadan boshlaymiz?</h3>
+            <p class="muted small">Kichik qadamlar katta natijalarga olib boradi.</p>
+
+            <button class="quick-action" id="quickAddTask">
+              ＋ Vazifa qo‘shish <span>→</span>
+            </button>
+            <a class="quick-action" href="#guides">
+              📚 Qo‘llanmalarni ochish <span>→</span>
+            </a>
+            <a class="quick-action" href="#results">
+              📊 Natijalarni ko‘rish <span>→</span>
+            </a>
+
+            <div class="quote-box">
+              <span>✦ KUN SHIORI</span>
+              <p>“Intizom motivatsiyadan ustun!”</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- QO‘LLANMALAR -->
+      <section id="guides" class="section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">BILIMLAR XAZINASI</p>
+            <h2>📚 Mening qo‘llanmalarim</h2>
+            <p class="muted">Barcha bilim va huquqiy materiallaringiz bir joyda.</p>
+          </div>
+          <span class="count-badge" id="guideCount">0 ta</span>
+        </div>
+
+        <div class="guide-toolbar">
+          <input id="guideSearch" type="search"
+                 placeholder="🔎 Qo‘llanma nomini qidirish...">
+          <button class="primary-button" id="createGuide">＋ Yangi qo‘llanma yaratish</button>
+          <button class="secondary-button" id="uploadGuide">📁 Fayl yuklash</button>
+          <input id="guideFile" type="file"
+                 accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" multiple hidden>
+        </div>
+
+        <div class="category-list" id="categoryList">
+          <button class="category-btn selected" data-category="Barchasi">Barchasi</button>
+          <button class="category-btn" data-category="Huquq">Huquq</button>
+          <button class="category-btn" data-category="Qonunchilik">Qonunchilik</button>
+          <button class="category-btn" data-category="Inson huquqlari">Inson huquqlari</button>
+          <button class="category-btn" data-category="Boshqa">Boshqa</button>
+        </div>
+
+        <div id="guideEditor" class="panel guide-editor hidden">
+          <div class="panel-heading">
+            <h3 id="editorHeading">Yangi qo‘llanma</h3>
+            <button class="icon-button" id="closeEditor" type="button">✕</button>
+          </div>
+
+          <form id="guideForm">
+            <label for="guideTitle">Qo‘llanma nomi</label>
+            <input id="guideTitle" type="text"
+                   placeholder="Masalan: Konstitutsiya" required>
+
+            <label for="guideCategory">Kategoriya</label>
+            <select id="guideCategory">
+              <option>Huquq</option>
+              <option>Qonunchilik</option>
+              <option>Inson huquqlari</option>
+              <option>Boshqa</option>
+            </select>
+
+            <label for="guideContent">Qo‘llanma matni</label>
+            <textarea id="guideContent" rows="8"
+                      placeholder="Bu yerga qo‘llanma matnini yozing..."></textarea>
+
+            <div class="form-actions">
+              <button class="primary-button" type="submit">Saqlash</button>
+              <button class="secondary-button" id="cancelGuide" type="button">Bekor qilish</button>
+            </div>
+          </form>
+        </div>
+
+        <div id="guideList" class="guide-grid"></div>
+
+        <div id="emptyGuides" class="empty-state">
+          <div>📚</div>
+          <h3>Qo‘llanmalar topilmadi</h3>
+          <p>Yangi qo‘llanma yarating yoki fayl yuklang.</p>
+        </div>
+      </section>
+
+      <!-- NATIJALAR -->
+      <section id="results" class="section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">RIVOJLANISH</p>
+            <h2>📊 Natijalar</h2>
+            <p class="muted">Vazifalaringiz bo‘yicha umumiy ko‘rsatkichlar.</p>
+          </div>
+        </div>
+
+        <div class="panel results-panel">
+          <div class="result-number">
+            <span class="muted">Bajarilgan vazifalar</span>
+            <strong id="resultCompleted">0</strong>
+          </div>
+          <div class="result-number">
+            <span class="muted">Bajarilmagan vazifalar</span>
+            <strong id="resultRemaining">0</strong>
+          </div>
+          <div class="result-number">
+            <span class="muted">Umumiy bajarilish</span>
+            <strong id="resultPercent">0%</strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- KALENDAR -->
+      <section id="calendar" class="section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">REJALASHTIRISH</p>
+            <h2>🗓️ Kalendar</h2>
+            <p class="muted">Muhim sanalar va muddatlar uchun joy.</p>
+          </div>
+        </div>
+
+        <div class="panel calendar-panel">
+          <div class="calendar-top">
+            <button class="icon-button" id="previousMonth">‹</button>
+            <h3 id="calendarTitle"></h3>
+            <button class="icon-button" id="nextMonth">›</button>
+          </div>
+          <div class="calendar-grid" id="calendarGrid"></div>
+        </div>
+      </section>
+
+      <!-- SOZLAMALAR -->
+      <section id="settings" class="section">
+        <div class="section-heading"><h2>⚙️ Sozlamalar</h2></div>
+        <div class="panel">
+          <h3>Ma’lumotlarni boshqarish</h3>
+          <p class="muted">Hozirgi vazifalar ushbu brauzerda saqlanadi.</p>
+          <button class="secondary-button" id="exportData">
+            Ma’lumotlarni yuklab olish
+          </button>
+        </div>
+      </section>
+
+      <!-- YORDAM -->
+      <section id="help" class="section">
+        <div class="section-heading"><h2>❔ Yordam</h2></div>
+        <div class="panel">
+          <h3>SEVENED ACADEMY LAW</h3>
+          <p class="muted">
+            Vazifalaringizni rejalashtiring, qo‘llanmalar yarating
+            va natijalaringizni kuzating.
+          </p>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <span>SEVENED ACADEMY LAW © 2026</span>
+        <span>Build Your Future ⚖️</span>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Supabase kutubxonasi -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+</body>
+</html>
