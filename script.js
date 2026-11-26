@@ -1,5 +1,10 @@
+// ======================================================
+// SEVENED ACADEMY LAW — MAIN JAVASCRIPT
+// ======================================================
+
 const SUPABASE_URL =
   "https://uanbykrpdefnotvzogac.supabase.co";
+
 const SUPABASE_KEY =
   "sb_publishable_eOi21erPMBkoq4LO_HaQDw_uNetqbNR";
 
@@ -8,15 +13,15 @@ if (!window.supabase) {
   throw new Error("Supabase topilmadi.");
 }
 
-if (SUPABASE_KEY === "BU_YERGA_SB_PUBLISHABLE_KEY") {
-  alert("Supabase Publishable Key kiriting.");
-  throw new Error("Supabase kaliti kiritilmagan.");
-}
-
 const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
+
+
+// ======================================================
+// GLOBAL VARIABLES
+// ======================================================
 
 let tasks = [];
 let guides = [];
@@ -26,6 +31,11 @@ let editingGuideId = null;
 let calendarDate = new Date();
 
 const $ = selector => document.querySelector(selector);
+
+
+// ======================================================
+// HELPERS
+// ======================================================
 
 function escapeHTML(value = "") {
   return String(value).replace(/[&<>"']/g, char => ({
@@ -41,7 +51,10 @@ function showMessage(message) {
   alert(message);
 }
 
+
+// ======================================================
 // LOGIN VA RO‘YXATDAN O‘TISH
+// ======================================================
 
 let isSignUpMode = false;
 
@@ -80,7 +93,9 @@ authForm.addEventListener("submit", async event => {
   const password = $("#authPassword").value;
 
   if (password.length < 8) {
-    setAuthMessage("Parol kamida 8 ta belgidan iborat bo‘lishi kerak.");
+    setAuthMessage(
+      "Parol kamida 8 ta belgidan iborat bo‘lishi kerak."
+    );
     return;
   }
 
@@ -124,12 +139,18 @@ authForm.addEventListener("submit", async event => {
   }
 });
 
+
+// ======================================================
 // FOYDALANUVCHI VA PROFIL
+// ======================================================
 
 function updateAuthUI(user) {
   currentUser = user;
 
-  document.body.classList.toggle("authenticated", Boolean(user));
+  document.body.classList.toggle(
+    "authenticated",
+    Boolean(user)
+  );
 
   const accountArea = $("#accountArea");
   if (accountArea) accountArea.innerHTML = "";
@@ -169,10 +190,16 @@ function updateAuthUI(user) {
   updateProfileModalContent();
 }
 
+
+// ======================================================
+// PROFIL MODAL
+// ======================================================
+
 function ensureProfileModal() {
   if ($("#profileModal")) return;
 
   const modal = document.createElement("div");
+
   modal.id = "profileModal";
   modal.className = "profile-modal hidden";
   modal.setAttribute("aria-hidden", "true");
@@ -185,12 +212,17 @@ function ensureProfileModal() {
       aria-modal="true"
       aria-labelledby="profileModalTitle">
 
-      <button class="icon-button profile-close"
+      <button
+        class="icon-button profile-modal-close"
         id="closeProfile"
         type="button"
-        aria-label="Yopish">✕</button>
+        aria-label="Yopish"
+      >✕</button>
 
-      <div class="profile-modal-avatar" id="profileAvatarLarge">S</div>
+      <div
+        class="profile-modal-avatar"
+        id="profileAvatarLarge"
+      >S</div>
 
       <p class="eyebrow">SEVENED ACADEMY LAW</p>
 
@@ -201,9 +233,11 @@ function ensureProfileModal() {
         <strong id="profileEmail">—</strong>
       </div>
 
-      <button class="secondary-button profile-logout"
+      <button
+        class="secondary-button profile-logout"
         id="profileLogout"
-        type="button">
+        type="button"
+      >
         Tizimdan chiqish
       </button>
 
@@ -229,7 +263,10 @@ function ensureProfileModal() {
       const { error } = await supabaseClient.auth.signOut();
 
       if (error) {
-        showMessage("Tizimdan chiqishda xatolik: " + error.message);
+        showMessage(
+          "Tizimdan chiqishda xatolik: " + error.message
+        );
+
         button.disabled = false;
         button.textContent = "Tizimdan chiqish";
         return;
@@ -238,6 +275,7 @@ function ensureProfileModal() {
       closeProfileModal();
     });
 }
+
 
 function updateProfileModalContent() {
   const email = $("#profileEmail");
@@ -253,6 +291,7 @@ function updateProfileModalContent() {
       (currentUser?.email || "S").trim().charAt(0).toUpperCase() || "S";
   }
 }
+
 
 function openProfileModal() {
   if (!currentUser) {
@@ -271,9 +310,9 @@ function openProfileModal() {
   document.body.classList.add("profile-modal-open");
 }
 
+
 function closeProfileModal() {
   const modal = $("#profileModal");
-
   if (!modal) return;
 
   modal.classList.add("hidden");
@@ -282,34 +321,38 @@ function closeProfileModal() {
   document.body.classList.remove("profile-modal-open");
 }
 
+
 function bindProfileTriggers() {
   const sidebarProfile = $(".sidebar-bottom");
   const headerAvatar = $(".header-avatar");
 
-  [sidebarProfile, headerAvatar].filter(Boolean).forEach(element => {
+  [sidebarProfile, headerAvatar]
+    .filter(Boolean)
+    .forEach(element => {
 
-    element.style.cursor = "pointer";
+      element.style.cursor = "pointer";
 
-    element.addEventListener("click", openProfileModal);
+      element.addEventListener("click", openProfileModal);
 
-    element.addEventListener("keydown", event => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        openProfileModal();
-      }
+      element.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openProfileModal();
+        }
+      });
     });
-
-  });
 
   document.addEventListener("keydown", event => {
     if (event.key === "Escape") closeProfileModal();
   });
 }
 
+
+// ======================================================
 // SUPABASE AUTH HOLATI
+// ======================================================
 
 supabaseClient.auth.onAuthStateChange((event, session) => {
-
   updateAuthUI(session?.user || null);
 
   if (event === "SIGNED_IN") {
@@ -322,15 +365,13 @@ supabaseClient.auth.onAuthStateChange((event, session) => {
   if (event === "SIGNED_OUT") {
     tasks = [];
     guides = [];
-
     renderTasks();
     renderGuides();
   }
-
 });
 
-async function checkExistingSession() {
 
+async function checkExistingSession() {
   const { data, error } =
     await supabaseClient.auth.getSession();
 
@@ -349,10 +390,16 @@ async function checkExistingSession() {
   }
 }
 
+
+// ======================================================
 // SANA
+// ======================================================
 
 function setTodayDate() {
-  $("#todayDate").textContent =
+  const dateElement = $("#todayDate");
+  if (!dateElement) return;
+
+  dateElement.textContent =
     new Date().toLocaleDateString("uz-UZ", {
       day: "numeric",
       month: "long",
@@ -360,10 +407,12 @@ function setTodayDate() {
     });
 }
 
+
+// ======================================================
 // VAZIFALARNI CLOUD'DAN YUKLASH
+// ======================================================
 
 async function loadTasks() {
-
   if (!currentUser) {
     tasks = [];
     renderTasks();
@@ -395,14 +444,18 @@ async function loadTasks() {
 
   } catch (error) {
     console.error(error);
-    showMessage("Vazifalarni yuklashda xatolik: " + error.message);
+    showMessage(
+      "Vazifalarni yuklashda xatolik: " + error.message
+    );
   }
 }
 
+
+// ======================================================
 // STATISTIKA
+// ======================================================
 
 function updateStatistics() {
-
   const total = tasks.length;
   const completed = tasks.filter(task => task.done).length;
   const remaining = total - completed;
@@ -422,15 +475,16 @@ function updateStatistics() {
   $("#resultPercent").textContent = percent + "%";
 }
 
+
+// ======================================================
 // VAZIFALARNI KO‘RSATISH
+// ======================================================
 
 function renderTasks() {
-
   const list = $("#taskList");
   list.innerHTML = "";
 
   tasks.forEach(task => {
-
     const item = document.createElement("div");
 
     item.className =
@@ -459,12 +513,16 @@ function renderTasks() {
         class="task-star ${task.important ? "selected" : ""}"
         data-action="star"
         data-id="${escapeHTML(task.id)}"
+        type="button"
+        aria-label="Muhimligini almashtirish"
       >★</button>
 
       <button
         class="task-delete"
         data-action="delete"
         data-id="${escapeHTML(task.id)}"
+        type="button"
+        aria-label="Vazifani o‘chirish"
       >✕</button>
     `;
 
@@ -481,7 +539,10 @@ function renderTasks() {
   updateStatistics();
 }
 
+
+// ======================================================
 // VAZIFA FORMASI
+// ======================================================
 
 function openTaskForm() {
   $("#taskForm").classList.remove("hidden");
@@ -497,10 +558,12 @@ $("#addTaskButton").addEventListener("click", openTaskForm);
 $("#quickAddTask").addEventListener("click", openTaskForm);
 $("#cancelTask").addEventListener("click", closeTaskForm);
 
+
+// ======================================================
 // YANGI VAZIFANI SAQLASH
+// ======================================================
 
 $("#taskForm").addEventListener("submit", async event => {
-
   event.preventDefault();
 
   if (!currentUser) {
@@ -553,10 +616,12 @@ $("#taskForm").addEventListener("submit", async event => {
   }
 });
 
+
+// ======================================================
 // VAZIFA HOLATINI O‘ZGARTIRISH
+// ======================================================
 
 $("#taskList").addEventListener("change", async event => {
-
   const checkbox = event.target.closest(
     '[data-action="toggle"]'
   );
@@ -587,10 +652,12 @@ $("#taskList").addEventListener("change", async event => {
   }
 });
 
-// MUHIMLIK VA O‘CHIRISH
+
+// ======================================================
+// VAZIFA MUHIMLIGI VA O‘CHIRISH
+// ======================================================
 
 $("#taskList").addEventListener("click", async event => {
-
   const button = event.target.closest("button[data-action]");
 
   if (!button || !currentUser) return;
@@ -602,7 +669,6 @@ $("#taskList").addEventListener("click", async event => {
   if (!task) return;
 
   if (button.dataset.action === "star") {
-
     const oldValue = task.important;
     task.important = !oldValue;
 
@@ -622,7 +688,6 @@ $("#taskList").addEventListener("click", async event => {
   }
 
   if (button.dataset.action === "delete") {
-
     if (!confirm("Vazifani o‘chirmoqchimisiz?")) return;
 
     const oldTasks = [...tasks];
@@ -645,10 +710,14 @@ $("#taskList").addEventListener("click", async event => {
       showMessage(error.message);
     }
   }
-});// QO‘LLANMALARNI CLOUD'DAN YUKLASH
+});
+
+
+// ======================================================
+// QO‘LLANMALARNI CLOUD'DAN YUKLASH
+// ======================================================
 
 async function loadGuides() {
-
   if (!currentUser) {
     guides = [];
     renderGuides();
@@ -683,14 +752,18 @@ async function loadGuides() {
 
   } catch (error) {
     console.error(error);
-    showMessage("Qo‘llanmalarni yuklashda xatolik: " + error.message);
+    showMessage(
+      "Qo‘llanmalarni yuklashda xatolik: " + error.message
+    );
   }
 }
 
-// QO‘LLANMA TAHRIRLASH OYNASI
+
+// ======================================================
+// QO‘LLANMA TAHRIRLASH
+// ======================================================
 
 function openGuideEditor(guide = null) {
-
   editingGuideId = guide ? guide.id : null;
 
   $("#guideForm").reset();
@@ -725,10 +798,12 @@ $("#createGuide").addEventListener("click", () => openGuideEditor());
 $("#closeEditor").addEventListener("click", closeGuideEditor);
 $("#cancelGuide").addEventListener("click", closeGuideEditor);
 
+
+// ======================================================
 // QO‘LLANMANI SAQLASH
+// ======================================================
 
 $("#guideForm").addEventListener("submit", async event => {
-
   event.preventDefault();
 
   if (!currentUser) {
@@ -754,8 +829,7 @@ $("#guideForm").addEventListener("submit", async event => {
     const values = {
       title,
       category,
-      content,
-      updated_at: new Date().toISOString()
+      content
     };
 
     let result;
@@ -792,7 +866,10 @@ $("#guideForm").addEventListener("submit", async event => {
   }
 });
 
+
+// ======================================================
 // FAYL NOMINI XAVFSIZ QILISH
+// ======================================================
 
 function safeFileName(name) {
   return String(name || "guide-file")
@@ -801,14 +878,16 @@ function safeFileName(name) {
     .slice(0, 100) || "guide-file";
 }
 
+
+// ======================================================
 // FAYL YUKLASH
+// ======================================================
 
 $("#uploadGuide").addEventListener("click", () => {
   $("#guideFile").click();
 });
 
 $("#guideFile").addEventListener("change", async event => {
-
   const files = Array.from(event.target.files || []);
 
   if (!files.length) return;
@@ -826,19 +905,22 @@ $("#guideFile").addEventListener("change", async event => {
   const userId = currentUser.id;
 
   for (const file of files) {
-
     const extension = file.name
       .split(".")
       .pop()
       .toLowerCase();
 
     if (!allowed.includes(extension)) {
-      showMessage(file.name + ": bu fayl turiga ruxsat yo‘q.");
+      showMessage(
+        file.name + ": bu fayl turiga ruxsat yo‘q."
+      );
       continue;
     }
 
     if (file.size > 20 * 1024 * 1024) {
-      showMessage(file.name + ": fayl 20 MB dan katta.");
+      showMessage(
+        file.name + ": fayl 20 MB dan katta."
+      );
       continue;
     }
 
@@ -874,7 +956,6 @@ $("#guideFile").addEventListener("change", async event => {
       if (insertError) throw insertError;
 
     } catch (error) {
-
       if (filePath) {
         await supabaseClient.storage
           .from("guide-files")
@@ -882,7 +963,9 @@ $("#guideFile").addEventListener("change", async event => {
       }
 
       console.error(error);
-      showMessage(file.name + " yuklanmadi: " + error.message);
+      showMessage(
+        file.name + " yuklanmadi: " + error.message
+      );
     }
   }
 
@@ -890,16 +973,19 @@ $("#guideFile").addEventListener("change", async event => {
   event.target.value = "";
 });
 
+
+// ======================================================
 // QO‘LLANMALARNI KO‘RSATISH
+// ======================================================
 
 function renderGuides() {
-
   const list = $("#guideList");
 
-  const search = $("#guideSearch").value.trim().toLowerCase();
+  const search = $("#guideSearch").value
+    .trim()
+    .toLowerCase();
 
   const filtered = guides.filter(guide => {
-
     const categoryMatch =
       selectedCategory === "Barchasi" ||
       guide.category === selectedCategory;
@@ -913,9 +999,7 @@ function renderGuides() {
   list.innerHTML = "";
 
   filtered.forEach(guide => {
-
     const card = document.createElement("article");
-
     card.className = "guide-card";
 
     const isFile = guide.type === "file";
@@ -944,27 +1028,34 @@ function renderGuides() {
       <p>${escapeHTML(description)}</p>
 
       <div class="guide-actions">
-
-        <button class="primary-button"
+        <button
+          class="primary-button"
           data-guide-action="open"
-          data-id="${escapeHTML(guide.id)}">
+          data-id="${escapeHTML(guide.id)}"
+          type="button"
+        >
           Ochish
         </button>
 
         ${!isFile ? `
-          <button class="secondary-button"
+          <button
+            class="secondary-button"
             data-guide-action="edit"
-            data-id="${escapeHTML(guide.id)}">
+            data-id="${escapeHTML(guide.id)}"
+            type="button"
+          >
             Tahrirlash
           </button>
         ` : ""}
 
-        <button class="secondary-button"
+        <button
+          class="secondary-button"
           data-guide-action="delete"
-          data-id="${escapeHTML(guide.id)}">
+          data-id="${escapeHTML(guide.id)}"
+          type="button"
+        >
           O‘chirish
         </button>
-
       </div>
     `;
 
@@ -981,29 +1072,36 @@ function renderGuides() {
 
 $("#guideSearch").addEventListener("input", renderGuides);
 
-// KATEGORIYA FILTRI
+
+// ======================================================
+// QO‘LLANMA KATEGORIYA FILTRI
+// ======================================================
 
 $("#categoryList").addEventListener("click", event => {
-
   const button = event.target.closest(".category-btn");
 
   if (!button) return;
 
   selectedCategory = button.dataset.category;
 
-  document.querySelectorAll(".category-btn").forEach(item => {
-    item.classList.toggle("selected", item === button);
-  });
+  $("#categoryList")
+    .querySelectorAll(".category-btn")
+    .forEach(item => {
+      item.classList.toggle("selected", item === button);
+    });
 
   renderGuides();
 });
 
+
+// ======================================================
 // QO‘LLANMALARNI OCHISH, TAHRIRLASH, O‘CHIRISH
+// ======================================================
 
 $("#guideList").addEventListener("click", async event => {
-
-  const button =
-    event.target.closest("button[data-guide-action]");
+  const button = event.target.closest(
+    "button[data-guide-action]"
+  );
 
   if (!button || !currentUser) return;
 
@@ -1021,13 +1119,11 @@ $("#guideList").addEventListener("click", async event => {
   }
 
   if (action === "delete") {
-
     if (!confirm(
       `"${guide.title}" qo‘llanmasini o‘chirmoqchimisiz?`
     )) return;
 
     try {
-
       if (guide.filePath) {
         const { error: storageError } =
           await supabaseClient.storage
@@ -1054,9 +1150,7 @@ $("#guideList").addEventListener("click", async event => {
   }
 
   if (action === "open") {
-
     if (guide.type === "file") {
-
       try {
         const { data, error } =
           await supabaseClient.storage
@@ -1076,7 +1170,9 @@ $("#guideList").addEventListener("click", async event => {
 
       } catch (error) {
         console.error(error);
-        showMessage("Faylni ochib bo‘lmadi: " + error.message);
+        showMessage(
+          "Faylni ochib bo‘lmadi: " + error.message
+        );
       }
 
     } else {
@@ -1085,31 +1181,30 @@ $("#guideList").addEventListener("click", async event => {
   }
 });
 
+
+// ======================================================
 // MATNLI QO‘LLANMANI KO‘RISH
+// ======================================================
 
 function openGuideViewer(guide) {
-
   const overlay = document.createElement("div");
-
   overlay.className = "guide-view-overlay";
 
   overlay.innerHTML = `
     <div class="guide-view-box">
-
       <div class="guide-view-header">
         <div>
           <span class="guide-category">
             ${escapeHTML(guide.category)}
           </span>
-
           <h2>${escapeHTML(guide.title)}</h2>
         </div>
 
-        <button class="icon-button close-viewer">✕</button>
+        <button class="icon-button close-viewer"
+          type="button">✕</button>
       </div>
 
       <div class="guide-view-content"></div>
-
     </div>
   `;
 
@@ -1125,10 +1220,14 @@ function openGuideViewer(guide) {
   overlay.addEventListener("click", event => {
     if (event.target === overlay) overlay.remove();
   });
-}// KALENDAR
+}
+
+
+// ======================================================
+// KALENDAR
+// ======================================================
 
 function renderCalendar() {
-
   const year = calendarDate.getFullYear();
   const month = calendarDate.getMonth();
 
@@ -1146,12 +1245,9 @@ function renderCalendar() {
   ];
 
   weekdays.forEach(day => {
-
     const cell = document.createElement("div");
-
     cell.className = "calendar-cell weekday";
     cell.textContent = day;
-
     grid.appendChild(cell);
   });
 
@@ -1162,21 +1258,16 @@ function renderCalendar() {
     new Date(year, month + 1, 0).getDate();
 
   for (let i = 0; i < offset; i++) {
-
     const blank = document.createElement("div");
-
     blank.className = "calendar-cell";
     blank.style.visibility = "hidden";
-
     grid.appendChild(blank);
   }
 
   const now = new Date();
 
   for (let day = 1; day <= daysInMonth; day++) {
-
     const cell = document.createElement("div");
-
     cell.className = "calendar-cell";
     cell.textContent = day;
 
@@ -1202,10 +1293,270 @@ $("#nextMonth").addEventListener("click", () => {
   renderCalendar();
 });
 
+
+// ======================================================
+// YORUG‘ / QORONG‘I REJIM
+// ======================================================
+
+(function initTheme() {
+  const controls = [
+    "#themeToggle",
+    "#settingsThemeToggle"
+  ]
+    .map(selector => document.querySelector(selector))
+    .filter(Boolean);
+
+  let savedTheme = "light";
+
+  try {
+    savedTheme =
+      localStorage.getItem("sevened-theme-reference") || "light";
+  } catch (error) {
+    console.warn("Theme storage unavailable.", error);
+  }
+
+  if (savedTheme !== "dark" && savedTheme !== "light") {
+    savedTheme = "light";
+  }
+
+  document.documentElement.dataset.theme = savedTheme;
+
+  function updateThemeControls() {
+    const isDark =
+      document.documentElement.dataset.theme === "dark";
+
+    controls.forEach(control => {
+      if (control.id === "themeToggle") {
+        control.setAttribute(
+          "aria-label",
+          isDark
+            ? "Yorug‘ rejimga o‘tish"
+            : "Qorong‘i rejimga o‘tish"
+        );
+
+        control.title = isDark
+          ? "Yorug‘ rejim"
+          : "Qorong‘i rejim";
+
+      } else {
+        control.textContent = isDark
+          ? "Yorug‘ rejimga o‘tish"
+          : "Qorong‘i rejimga o‘tish";
+      }
+    });
+  }
+
+  function toggleTheme() {
+    const next =
+      document.documentElement.dataset.theme === "dark"
+        ? "light"
+        : "dark";
+
+    document.documentElement.dataset.theme = next;
+
+    try {
+      localStorage.setItem(
+        "sevened-theme-reference",
+        next
+      );
+    } catch (error) {
+      console.warn("Could not save theme preference.", error);
+    }
+
+    updateThemeControls();
+  }
+
+  controls.forEach(control => {
+    control.addEventListener("click", toggleTheme);
+  });
+
+  updateThemeControls();
+})();
+
+
+// ======================================================
+// BILDIRISHNOMALAR
+// ======================================================
+
+(function initNotifications() {
+  const toggle = $("#notificationToggle");
+  const popover = $("#notificationPopover");
+  const dot = $("#notificationDot");
+  const markRead = $("#markNotificationsRead");
+
+  if (!toggle || !popover) return;
+
+  function closePopover() {
+    popover.classList.add("hidden");
+    toggle.setAttribute("aria-expanded", "false");
+  }
+
+  toggle.addEventListener("click", event => {
+    event.stopPropagation();
+
+    const willOpen =
+      popover.classList.contains("hidden");
+
+    popover.classList.toggle("hidden", !willOpen);
+
+    toggle.setAttribute(
+      "aria-expanded",
+      String(willOpen)
+    );
+  });
+
+  popover.addEventListener("click", event => {
+    event.stopPropagation();
+  });
+
+  document.addEventListener("click", closePopover);
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") closePopover();
+  });
+
+  if (markRead) {
+    markRead.addEventListener("click", () => {
+      if (dot) dot.classList.add("hidden");
+      closePopover();
+    });
+  }
+})();
+
+
+// ======================================================
+// GLOBAL QIDIRUV VA YANGILIK KATEGORIYALARI
+// ======================================================
+
+(function initNewsSearchAndFilters() {
+  const search = $("#globalSearch");
+  const filters = $("#newsFilters");
+  const grid = $("#newsGrid");
+  const feature = $(".news-feature");
+  const empty = $("#newsNoResults");
+
+  if (!grid) return;
+
+  let activeCategory = "Barchasi";
+
+  function applyFilters() {
+    const query = (search?.value || "")
+      .trim()
+      .toLocaleLowerCase("uz");
+
+    let visibleCount = 0;
+
+    grid.querySelectorAll(".news-card").forEach(card => {
+      const category = card.dataset.newsCategory || "";
+
+      const content = [
+        card.dataset.newsSearch || "",
+        card.textContent || ""
+      ].join(" ").toLocaleLowerCase("uz");
+
+      const categoryMatch =
+        activeCategory === "Barchasi" ||
+        category === activeCategory;
+
+      const searchMatch =
+        !query || content.includes(query);
+
+      const visible = categoryMatch && searchMatch;
+
+      card.hidden = !visible;
+
+      if (visible) visibleCount++;
+    });
+
+    let featureVisible = false;
+
+    if (feature) {
+      const category = feature.dataset.newsCategory || "";
+
+      const content = [
+        feature.dataset.newsSearch || "",
+        feature.textContent || ""
+      ].join(" ").toLocaleLowerCase("uz");
+
+      featureVisible =
+        (activeCategory === "Barchasi" ||
+          category === activeCategory) &&
+        (!query || content.includes(query));
+
+      feature.hidden = !featureVisible;
+    }
+
+    if (empty) {
+      empty.classList.toggle(
+        "hidden",
+        visibleCount > 0 || featureVisible
+      );
+    }
+  }
+
+  if (filters) {
+    filters.addEventListener("click", event => {
+      const button = event.target.closest(
+        "[data-news-category]"
+      );
+
+      if (!button) return;
+
+      activeCategory =
+        button.dataset.newsCategory || "Barchasi";
+
+      filters
+        .querySelectorAll("[data-news-category]")
+        .forEach(item => {
+          item.classList.toggle("selected", item === button);
+        });
+
+      applyFilters();
+    });
+  }
+
+  if (search) {
+    search.addEventListener("input", applyFilters);
+
+    search.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        search.value = "";
+        applyFilters();
+        search.blur();
+      }
+
+      if (event.key === "Enter") {
+        event.preventDefault();
+
+        const newsLink =
+          document.querySelector('.menu-item[href="#news"]');
+
+        if (newsLink) newsLink.click();
+
+        applyFilters();
+      }
+    });
+
+    document.addEventListener("keydown", event => {
+      if (
+        (event.ctrlKey || event.metaKey) &&
+        event.key.toLowerCase() === "k"
+      ) {
+        event.preventDefault();
+        search.focus();
+      }
+    });
+  }
+
+  applyFilters();
+})();
+
+
+// ======================================================
 // MENYU — FAQAT TANLANGAN SAHIFANI KO‘RSATISH
+// ======================================================
 
 function showPage(pageId, updateHash = true) {
-
   const sections = Array.from(
     document.querySelectorAll("main .section[id]")
   );
@@ -1217,17 +1568,18 @@ function showPage(pageId, updateHash = true) {
   if (!target) return;
 
   sections.forEach(section => {
-
     const isActive = section === target;
 
     section.classList.toggle("page-visible", isActive);
     section.classList.toggle("page-hidden", !isActive);
 
-    section.setAttribute("aria-hidden", String(!isActive));
+    section.setAttribute(
+      "aria-hidden",
+      String(!isActive)
+    );
   });
 
   document.querySelectorAll(".menu-item").forEach(link => {
-
     const isActive =
       link.getAttribute("href") === "#" + target.id;
 
@@ -1254,19 +1606,15 @@ function showPage(pageId, updateHash = true) {
 }
 
 function bindPageNavigation() {
-
   document.querySelectorAll(
     '.menu-item[href^="#"], .quick-action[href^="#"]'
   ).forEach(link => {
-
     link.addEventListener("click", event => {
-
       const pageId = link.getAttribute("href").slice(1);
 
       if (!$("#" + CSS.escape(pageId))) return;
 
       event.preventDefault();
-
       showPage(pageId);
     });
   });
@@ -1287,10 +1635,12 @@ function bindPageNavigation() {
 bindPageNavigation();
 bindProfileTriggers();
 
-// MA'LUMOTLARNI EKSPORT QILISH
+
+// ======================================================
+// MA’LUMOTLARNI EKSPORT QILISH
+// ======================================================
 
 $("#exportData").addEventListener("click", () => {
-
   const data = {
     tasks,
     guides,
@@ -1308,16 +1658,17 @@ $("#exportData").addEventListener("click", () => {
 
   link.href = url;
   link.download = "sevened-data.json";
-
   link.click();
 
   URL.revokeObjectURL(url);
 });
 
+
+// ======================================================
 // DASTURNI ISHGA TUSHIRISH
+// ======================================================
 
 async function initializeApp() {
-
   setTodayDate();
 
   renderTasks();

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="uz">
 <head>
@@ -44,48 +43,212 @@
   <div class="app">
 
     <aside class="sidebar">
-      <div class="brand">
-        <div class="brand-icon">⚖️</div>
-        <div>
+
+      <!-- SEVENED ACADEMY LAW — VARIANT 3 MONOGRAM EMBLEM -->
+      <div class="brand" aria-label="SEVENED ACADEMY LAW">
+
+        <div class="brand-emblem" aria-hidden="true">
+
+          <svg viewBox="0 0 180 170"
+               role="img"
+               aria-label="SEVENED Monogram Emblem">
+
+            <defs>
+              <linearGradient id="sevenedGold"
+                              x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#fff0a8"/>
+                <stop offset="48%" stop-color="#f4c24e"/>
+                <stop offset="100%" stop-color="#c8891b"/>
+              </linearGradient>
+
+              <linearGradient id="monogramLight"
+                              x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="100%" stop-color="#dce5f1"/>
+              </linearGradient>
+            </defs>
+
+            <!-- GEOMETRIK HEXAGON -->
+            <path
+              d="M90 7 L151 40 L151 111 L90 145 L29 111 L29 40 Z"
+              fill="none"
+              stroke="url(#sevenedGold)"
+              stroke-width="5"
+              stroke-linejoin="round"
+            />
+
+            <!-- GEOMETRIK S MONOGRAM -->
+            <path
+              d="M116 42 H70 L61 51 V61 L111 82 L119 91 L110 101 H63"
+              fill="none"
+              stroke="url(#monogramLight)"
+              stroke-width="13"
+              stroke-linecap="square"
+              stroke-linejoin="bevel"
+            />
+
+            <path
+              d="M69 57 L111 75 L119 83"
+              fill="none"
+              stroke="url(#sevenedGold)"
+              stroke-width="8"
+              stroke-linecap="square"
+              stroke-linejoin="bevel"
+            />
+
+            <path
+              d="M63 101 H110 L119 92"
+              fill="none"
+              stroke="url(#sevenedGold)"
+              stroke-width="8"
+              stroke-linecap="square"
+              stroke-linejoin="bevel"
+            />
+
+            <!-- UCHTA AKADEMIK USTUN -->
+            <path
+              d="M62 111 H118"
+              stroke="url(#sevenedGold)"
+              stroke-width="5"
+            />
+
+            <path
+              d="M72 114 V137 M90 114 V140 M108 114 V137"
+              stroke="url(#sevenedGold)"
+              stroke-width="7"
+              stroke-linecap="square"
+            />
+
+          </svg>
+        </div>
+
+        <div class="brand-wordmark">
           <h2>SEVENED</h2>
           <span>ACADEMY LAW</span>
+          <strong>Build Your Future.</strong>
         </div>
+
       </div>
 
+      <!-- ASOSIY MENYU -->
       <div class="sidebar-label">ASOSIY MENYU</div>
 
-      <nav class="menu">
+      <nav class="menu" aria-label="Asosiy menyu">
+
         <a class="menu-item active" href="#dashboard">
-          🏠 <span>Bosh sahifa</span>
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="m3 10 9-7 9 7"/>
+              <path d="M5 9v11h14V9"/>
+              <path d="M9 20v-6h6v6"/>
+            </svg>
+          </span>
+          <span>Bosh sahifa</span>
         </a>
+
         <a class="menu-item" href="#tasks">
-          ☑️ <span>Uy vazifalari</span>
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+              <rect x="4" y="4" width="16" height="16" rx="2"/>
+              <path d="M8 8h.01 M12 8h.01 M16 8h.01"/>
+              <path d="M8 12h.01 M12 12h.01 M16 12h.01"/>
+              <path d="M8 16h.01 M12 16h.01 M16 16h.01"/>
+            </svg>
+          </span>
+          <span>Uy vazifasi</span>
         </a>
+
         <a class="menu-item" href="#guides">
-          📚 <span>Mening qo‘llanmalarim</span>
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 7c-2-2-5-3-9-2v14c4-1 7 0 9 2"/>
+              <path d="M12 7c2-2 5-3 9-2v14c-4-1-7 0-9 2"/>
+              <path d="M12 7v14"/>
+            </svg>
+          </span>
+          <span>Qo‘llanmalar</span>
         </a>
+
         <a class="menu-item" href="#results">
-          📊 <span>Natijalar</span>
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 20V11 M10 20V5 M16 20V9 M22 20V3"/>
+              <path d="M2 20h20"/>
+            </svg>
+          </span>
+          <span>Natijalar</span>
         </a>
+
         <a class="menu-item" href="#calendar">
-          🗓️ <span>Kalendar</span>
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="5" width="18" height="16" rx="2"/>
+              <path d="M16 3v4 M8 3v4 M3 10h18"/>
+              <path d="M8 14h.01 M12 14h.01 M16 14h.01"/>
+              <path d="M8 17h.01 M12 17h.01"/>
+            </svg>
+          </span>
+          <span>Kalendar</span>
         </a>
+
+        <a class="menu-item" href="#purchases">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M3 3h2l2.4 12.2a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6L23 8H6"/>
+              <circle cx="10" cy="21" r="1"/>
+              <circle cx="19" cy="21" r="1"/>
+            </svg>
+          </span>
+          <span>Mening xaridlarim</span>
+        </a>
+
+        <a class="menu-item" href="#news">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="4" width="18" height="16" rx="2"/>
+              <path d="M7 8h5v5H7z"/>
+              <path d="M15 8h2 M15 11h2 M7 16h10"/>
+            </svg>
+          </span>
+          <span>Huquqiy yangiliklar</span>
+        </a>
+
       </nav>
 
+      <!-- BOSHQA -->
       <div class="sidebar-label">BOSHQA</div>
 
-      <nav class="menu">
+      <nav class="menu" aria-label="Qo‘shimcha menyu">
+
         <a class="menu-item" href="#settings">
-          ⚙️ <span>Sozlamalar</span>
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a8 8 0 0 0 0-2l1.4-1.1-1.4-2.4-1.7.7a8 8 0 0 0-1.7-1L15.7 7h-2.8l-.3 2.2a8 8 0 0 0-1.7 1l-1.7-.7-1.4 2.4L9.2 13a8 8 0 0 0 0 2l-1.4 1.1 1.4 2.4 1.7-.7a8 8 0 0 0 1.7 1l.3 2.2h2.8l.3-2.2a8 8 0 0 0 1.7-1l1.7.7 1.4-2.4z"
+                    transform="translate(-1 -1) scale(1.08)"/>
+            </svg>
+          </span>
+          <span>Sozlamalar</span>
         </a>
+
         <a class="menu-item" href="#help">
-          ❔ <span>Yordam</span>
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M9.7 9a2.4 2.4 0 1 1 4.3 1.5c-.8 1-2 1.1-2 2.7"/>
+              <path d="M12 17h.01"/>
+            </svg>
+          </span>
+          <span>Yordam</span>
         </a>
+
       </nav>
 
       <!-- CHAP PASTDAGI PROFIL -->
       <button class="sidebar-bottom profile-trigger"
-              id="sidebarProfile" type="button">
+              id="sidebarProfile"
+              type="button">
+
         <span class="profile-avatar" data-user-initial>S</span>
 
         <span class="profile-copy">
@@ -96,29 +259,118 @@
         </span>
 
         <span class="profile-chevron">›</span>
+
       </button>
+
     </aside>
 
+    <!-- ASOSIY KONTENT -->
     <main class="main-content">
 
       <!-- YUQORI PANEL -->
       <header class="top-header">
-        <div>
-          <p class="eyebrow">SEVENED ACADEMY LAW</p>
-          <h1>Xush kelibsiz! 👋</h1>
-          <p class="muted">
-            Bugungi rejangiz va natijalaringiz shu yerda.
-          </p>
+
+        <!-- QIDIRUV -->
+        <div class="global-search-wrap">
+          <span class="search-symbol" aria-hidden="true">⌕</span>
+
+          <input
+            id="globalSearch"
+            class="global-search"
+            type="search"
+            placeholder="Yangiliklar, qonunlar, tashkilotlar bo‘yicha qidirish..."
+            aria-label="Sayt bo‘ylab qidirish"
+          >
+
+          <kbd>Ctrl + K</kbd>
         </div>
 
         <div class="header-actions">
-          <span class="date-label" id="todayDate"></span>
-          <div id="accountArea" class="account-area"></div>
+
+          <span class="date-label" id="todayDate" hidden></span>
+
+          <!-- YORUG‘ / QORONG‘I REJIM -->
+          <button
+            class="theme-switch"
+            id="themeToggle"
+            type="button"
+            aria-label="Rang rejimini almashtirish"
+            title="Yorug‘ / qorong‘i rejim"
+          >
+            <span class="theme-sun" aria-hidden="true">☀</span>
+            <span class="theme-moon" aria-hidden="true">☾</span>
+          </button>
+
+          <!-- BILDIRISHNOMALAR -->
+          <div class="notification-wrap">
+
+            <button
+              class="icon-circle notification-toggle"
+              id="notificationToggle"
+              type="button"
+              aria-label="Bildirishnomalar"
+              aria-expanded="false"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/>
+              </svg>
+
+              <i class="notification-dot" id="notificationDot"></i>
+            </button>
+
+            <div
+              class="notification-popover hidden"
+              id="notificationPopover"
+            >
+              <div class="notification-heading">
+                <strong>Bildirishnomalar</strong>
+                <button id="markNotificationsRead" type="button">
+                  O‘qildi
+                </button>
+              </div>
+
+              <div class="notification-item">
+                <span class="notification-item-icon">⚖</span>
+                <div>
+                  <strong>Huquqiy yangiliklar</strong>
+                  <p>
+                    Yangi maqolalar va muhim o‘zgarishlarni
+                    shu bo‘limdan kuzating.
+                  </p>
+                  <small>SEVENED ACADEMY</small>
+                </div>
+              </div>
+
+              <div class="notification-item">
+                <span class="notification-item-icon">📚</span>
+                <div>
+                  <strong>Qo‘llanmalar</strong>
+                  <p>
+                    Yangi o‘quv materiallari e’lon qilinganda
+                    shu yerda ko‘rinadi.
+                  </p>
+                  <small>SEVENED ACADEMY</small>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ACCOUNT / PROFIL -->
+          <button
+            class="header-avatar profile-trigger"
+            id="headerProfile"
+            type="button"
+            aria-label="Profilni ochish"
+            data-user-initial
+          >S</button>
+
         </div>
       </header>
 
       <!-- BOSH SAHIFA -->
       <section id="dashboard" class="section">
+
         <div class="section-heading">
           <div>
             <p class="eyebrow">UMUMIY KO‘RSATKICHLAR</p>
@@ -127,6 +379,7 @@
         </div>
 
         <div class="stats-grid">
+
           <article class="stat-card">
             <div class="stat-icon blue">📚</div>
             <p>Jami vazifalar</p>
@@ -152,27 +405,33 @@
             <div class="stat-icon gold">⭐</div>
             <p>Bajarilish darajasi</p>
             <h2 id="progressPercent">0%</h2>
+
             <div class="progress-track">
               <div id="progressBar" class="progress-fill"></div>
             </div>
           </article>
+
         </div>
       </section>
 
       <!-- VAZIFALAR -->
       <section id="tasks" class="section">
+
         <div class="section-heading">
           <div>
             <p class="eyebrow">KUNLIK REJA</p>
             <h2>Vazifalarim</h2>
           </div>
+
           <button class="primary-button" id="addTaskButton">
             ＋ Yangi vazifa
           </button>
         </div>
 
         <div class="task-layout">
+
           <div class="panel task-panel">
+
             <div class="panel-heading">
               <div>
                 <h3>📋 Bugungi vazifalar</h3>
@@ -180,12 +439,18 @@
                   Vazifalarni belgilang va rivojlanishingizni kuzating.
                 </p>
               </div>
+
               <span class="count-badge" id="taskCount">0 ta</span>
             </div>
 
             <form id="taskForm" class="task-form hidden">
-              <input id="taskTitle" type="text"
-                     placeholder="Vazifa nomi..." required>
+
+              <input
+                id="taskTitle"
+                type="text"
+                placeholder="Vazifa nomi..."
+                required
+              >
 
               <select id="taskSubject">
                 <option value="Huquq">Huquq</option>
@@ -198,10 +463,12 @@
                 Saqlash
               </button>
 
-              <button class="secondary-button" id="cancelTask"
+              <button class="secondary-button"
+                      id="cancelTask"
                       type="button">
                 Bekor qilish
               </button>
+
             </form>
 
             <div id="taskList" class="task-list"></div>
@@ -211,11 +478,15 @@
               <h3>Hozircha vazifalar yo‘q</h3>
               <p>Yangi vazifa qo‘shish orqali rejangizni boshlang.</p>
             </div>
+
           </div>
 
+          <!-- TEZKOR AMALLAR -->
           <aside class="panel quick-panel">
+
             <p class="eyebrow">TEZKOR AMALLAR</p>
             <h3>Bugun nimadan boshlaymiz?</h3>
+
             <p class="muted small">
               Kichik qadamlar katta natijalarga olib boradi.
             </p>
@@ -236,12 +507,14 @@
               <span>✦ KUN SHIORI</span>
               <p>“Intizom motivatsiyadan ustun!”</p>
             </div>
+
           </aside>
         </div>
       </section>
 
       <!-- QO‘LLANMALAR -->
       <section id="guides" class="section">
+
         <div class="section-heading">
           <div>
             <p class="eyebrow">BILIMLAR XAZINASI</p>
@@ -250,12 +523,17 @@
               Barcha bilim va huquqiy materiallaringiz bir joyda.
             </p>
           </div>
+
           <span class="count-badge" id="guideCount">0 ta</span>
         </div>
 
         <div class="guide-toolbar">
-          <input id="guideSearch" type="search"
-                 placeholder="🔎 Qo‘llanma nomini qidirish...">
+
+          <input
+            id="guideSearch"
+            type="search"
+            placeholder="🔎 Qo‘llanma nomini qidirish..."
+          >
 
           <button class="primary-button" id="createGuide">
             ＋ Yangi qo‘llanma yaratish
@@ -265,35 +543,68 @@
             📁 Fayl yuklash
           </button>
 
-          <input id="guideFile" type="file"
-                 accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
-                 multiple hidden>
+          <input
+            id="guideFile"
+            type="file"
+            accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
+            multiple
+            hidden
+          >
+
         </div>
 
+        <!-- QO‘LLANMA KATEGORIYALARI -->
         <div class="category-list" id="categoryList">
-          <button class="category-btn selected"
-                  data-category="Barchasi">Barchasi</button>
-          <button class="category-btn"
-                  data-category="Huquq">Huquq</button>
-          <button class="category-btn"
-                  data-category="Qonunchilik">Qonunchilik</button>
-          <button class="category-btn"
-                  data-category="Inson huquqlari">Inson huquqlari</button>
-          <button class="category-btn"
-                  data-category="Boshqa">Boshqa</button>
+
+          <button
+            class="category-btn selected"
+            data-category="Barchasi"
+          >Barchasi</button>
+
+          <button
+            class="category-btn"
+            data-category="Huquq"
+          >Huquq</button>
+
+          <button
+            class="category-btn"
+            data-category="Qonunchilik"
+          >Qonunchilik</button>
+
+          <button
+            class="category-btn"
+            data-category="Inson huquqlari"
+          >Inson huquqlari</button>
+
+          <button
+            class="category-btn"
+            data-category="Boshqa"
+          >Boshqa</button>
+
         </div>
 
+        <!-- QO‘LLANMA TAHRIRLASH -->
         <div id="guideEditor" class="panel guide-editor hidden">
+
           <div class="panel-heading">
             <h3 id="editorHeading">Yangi qo‘llanma</h3>
-            <button class="icon-button" id="closeEditor"
-                    type="button">✕</button>
+
+            <button
+              class="icon-button"
+              id="closeEditor"
+              type="button"
+            >✕</button>
           </div>
 
           <form id="guideForm">
+
             <label for="guideTitle">Qo‘llanma nomi</label>
-            <input id="guideTitle" type="text"
-                   placeholder="Masalan: Konstitutsiya" required>
+            <input
+              id="guideTitle"
+              type="text"
+              placeholder="Masalan: Konstitutsiya"
+              required
+            >
 
             <label for="guideCategory">Kategoriya</label>
             <select id="guideCategory">
@@ -304,18 +615,26 @@
             </select>
 
             <label for="guideContent">Qo‘llanma matni</label>
-            <textarea id="guideContent" rows="8"
-                      placeholder="Bu yerga qo‘llanma matnini yozing...">
-            </textarea>
+            <textarea
+              id="guideContent"
+              rows="8"
+              placeholder="Bu yerga qo‘llanma matnini yozing..."
+            ></textarea>
 
             <div class="form-actions">
+
               <button class="primary-button" type="submit">
                 Saqlash
               </button>
-              <button class="secondary-button" id="cancelGuide"
-                      type="button">
+
+              <button
+                class="secondary-button"
+                id="cancelGuide"
+                type="button"
+              >
                 Bekor qilish
               </button>
+
             </div>
           </form>
         </div>
@@ -327,10 +646,12 @@
           <h3>Qo‘llanmalar topilmadi</h3>
           <p>Yangi qo‘llanma yarating yoki fayl yuklang.</p>
         </div>
+
       </section>
 
       <!-- NATIJALAR -->
       <section id="results" class="section">
+
         <div class="section-heading">
           <div>
             <p class="eyebrow">RIVOJLANISH</p>
@@ -342,6 +663,7 @@
         </div>
 
         <div class="panel results-panel">
+
           <div class="result-number">
             <span class="muted">Bajarilgan vazifalar</span>
             <strong id="resultCompleted">0</strong>
@@ -356,11 +678,13 @@
             <span class="muted">Umumiy bajarilish</span>
             <strong id="resultPercent">0%</strong>
           </div>
+
         </div>
       </section>
 
       <!-- KALENDAR -->
       <section id="calendar" class="section">
+
         <div class="section-heading">
           <div>
             <p class="eyebrow">REJALASHTIRISH</p>
@@ -372,75 +696,603 @@
         </div>
 
         <div class="panel calendar-panel">
+
           <div class="calendar-top">
             <button class="icon-button" id="previousMonth">‹</button>
             <h3 id="calendarTitle"></h3>
             <button class="icon-button" id="nextMonth">›</button>
           </div>
+
           <div class="calendar-grid" id="calendarGrid"></div>
+
         </div>
+      </section>
+
+      <!-- HUQUQIY YANGILIKLAR -->
+      <section
+        id="news"
+        class="section page-hidden"
+        aria-hidden="true"
+      >
+
+        <div class="news-title-row">
+
+          <div class="news-title-group">
+            <span class="news-title-icon" aria-hidden="true">▤</span>
+
+            <div>
+              <h1>Huquqiy yangiliklar</h1>
+              <p>
+                O‘zbekiston va dunyodagi dolzarb huquqiy yangiliklar,
+                qonunchilikdagi o‘zgarishlar va muhim voqealar.
+              </p>
+            </div>
+          </div>
+
+          <a
+            class="sources-button"
+            href="https://lex.uz"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>▱</span> Manbalarimiz
+          </a>
+
+        </div>
+
+        <div class="news-layout">
+
+          <!-- MARKAZIY USTUN -->
+          <div class="news-main-column">
+
+            <!-- KATEGORIYALAR -->
+            <div
+              class="news-filters"
+              id="newsFilters"
+              aria-label="Yangilik kategoriyalari"
+            >
+
+              <button
+                class="category-btn selected"
+                data-news-category="Barchasi"
+              >
+                <span>▦</span> Barchasi
+              </button>
+
+              <button
+                class="category-btn"
+                data-news-category="O‘zbekiston"
+              >
+                <span>🇺🇿</span> O‘zbekiston
+              </button>
+
+              <button
+                class="category-btn"
+                data-news-category="Xalqaro"
+              >
+                <span>◎</span> Xalqaro
+              </button>
+
+              <button
+                class="category-btn"
+                data-news-category="Inson huquqlari"
+              >
+                <span>♧</span> Inson huquqlari
+              </button>
+
+              <button
+                class="category-btn"
+                data-news-category="Sud-huquq"
+              >
+                <span>⚒</span> Sud-huquq
+              </button>
+
+              <button
+                class="category-btn"
+                data-news-category="Qonunchilik"
+              >
+                <span>▤</span> Qonunchilik
+              </button>
+
+              <button
+                class="category-btn"
+                data-news-category="Tashkilotlar"
+              >
+                <span>◉</span> Tashkilotlar
+              </button>
+
+            </div>
+
+            <!-- KATTA YANGILIK BANNERI -->
+            <article
+              class="news-feature"
+              data-news-category="O‘zbekiston"
+              data-news-search="o‘zbekiston yangi qonun loyihasi xalq muhokamasi raqamli huquqlar"
+            >
+
+              <div class="news-feature-image">
+                <img
+                  src="assets/news/hero-courthouse.jpg"
+                  alt="O‘zbekiston sud-huquq binosi va bayroq"
+                  loading="eager"
+                >
+
+                <span class="feature-dots">
+                  <i></i>
+                  <b></b>
+                  <i></i>
+                  <i></i>
+                </span>
+              </div>
+
+              <div class="news-feature-copy">
+
+                <div class="feature-meta">
+                  <span class="news-tag">O‘zbekiston</span>
+                  <span class="news-date">▦ 26-noyabr, 2026</span>
+                </div>
+
+                <h2>
+                  O‘zbekistonda yangi qonun loyihasi xalq
+                  muhokamasiga qo‘yildi
+                </h2>
+
+                <p>
+                  Loyiha fuqarolarning raqamli huquqlari,
+                  shaxsiy ma’lumotlar himoyasi va onlayn
+                  xizmatlar xavfsizligini kuchaytirishni
+                  nazarda tutadi.
+                </p>
+
+                <a
+                  class="read-more-button"
+                  href="https://lex.uz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Batafsil o‘qish <span>→</span>
+                </a>
+
+                <span class="demo-note">
+                  Dizayn uchun namuna kontent
+                </span>
+
+              </div>
+            </article>
+
+            <!-- SO‘NGGI YANGILIKLAR -->
+            <div class="news-section-heading">
+
+              <h2>So‘nggi yangiliklar</h2>
+
+              <div class="news-sort-controls">
+                <button type="button" class="news-sort-button">
+                  ▦ Sana bo‘yicha⌄
+                </button>
+
+                <button type="button" class="news-sort-button">
+                  <span>ϟ</span> Eng dolzarb⌄
+                </button>
+              </div>
+
+            </div>
+
+            <!-- RASMLI YANGILIK KARTOCHKALARI -->
+            <div class="news-card-grid" id="newsGrid">
+
+              <article
+                class="news-card"
+                data-news-category="Sud-huquq"
+                data-news-search="sudlar faoliyati raqamlashtirish yangi chora tadbirlar"
+              >
+
+                <a
+                  class="news-card-image"
+                  href="https://lex.uz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="assets/news/news-scales.jpg"
+                    alt="Adolat tarozisi va huquqiy kitoblar"
+                    loading="lazy"
+                  >
+                </a>
+
+                <div class="news-card-body">
+
+                  <span class="news-tag tag-purple">Sud-huquq</span>
+
+                  <h3>
+                    Sudlar faoliyatini raqamlashtirish bo‘yicha
+                    yangi chora-tadbirlar
+                  </h3>
+
+                  <p>
+                    O‘zbekiston sud ishlarini yuritish jarayonini
+                    yanada qulaylashtirish va onlayn xizmatlarni
+                    kengaytirish masalalariga e’tibor qaratmoqda.
+                  </p>
+
+                  <div class="news-card-footer">
+                    <span>▦ 25-noyabr, 2026</span>
+                    <a
+                      href="https://lex.uz"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Manbaga o‘tish"
+                    >→</a>
+                  </div>
+
+                </div>
+              </article>
+
+              <article
+                class="news-card"
+                data-news-category="Xalqaro"
+                data-news-search="bmt suniy intellekt inson huquqlari tavsiyalar"
+              >
+
+                <a
+                  class="news-card-image"
+                  href="https://www.un.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="assets/news/news-un.jpg"
+                    alt="Birlashgan Millatlar Tashkiloti binosi va bayroqlari"
+                    loading="lazy"
+                  >
+                </a>
+
+                <div class="news-card-body">
+
+                  <span class="news-tag tag-gold">Xalqaro</span>
+
+                  <h3>
+                    BMT: sun’iy intellekt va inson huquqlari
+                    bo‘yicha tavsiyalar
+                  </h3>
+
+                  <p>
+                    Xalqaro tashkilotlar sun’iy intellektdan
+                    foydalanishda inson huquqlarini himoya
+                    qilishga alohida e’tibor qaratmoqda.
+                  </p>
+
+                  <div class="news-card-footer">
+                    <span>▦ 24-noyabr, 2026</span>
+                    <a
+                      href="https://www.un.org"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Manbaga o‘tish"
+                    >→</a>
+                  </div>
+
+                </div>
+              </article>
+
+              <article
+                class="news-card"
+                data-news-category="Qonunchilik"
+                data-news-search="yangi qonun kichik biznes imtiyozlar"
+              >
+
+                <a
+                  class="news-card-image"
+                  href="https://lex.uz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="assets/news/news-document.jpg"
+                    alt="Huquqiy hujjat imzolash jarayoni"
+                    loading="lazy"
+                  >
+                </a>
+
+                <div class="news-card-body">
+
+                  <span class="news-tag tag-gold">Qonunchilik</span>
+
+                  <h3>
+                    Yangi qonun: kichik biznes uchun
+                    imtiyozlar kengaytirilishi
+                  </h3>
+
+                  <p>
+                    Qonun loyihasida tadbirkorlar va startaplar
+                    uchun soliq hamda ma’muriy yengilliklar
+                    nazarda tutilishi mumkin.
+                  </p>
+
+                  <div class="news-card-footer">
+                    <span>▦ 23-noyabr, 2026</span>
+                    <a
+                      href="https://lex.uz"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Manbaga o‘tish"
+                    >→</a>
+                  </div>
+
+                </div>
+              </article>
+
+            </div>
+
+            <p id="newsNoResults" class="news-no-results hidden">
+              Bu qidiruv bo‘yicha yangilik topilmadi.
+            </p>
+
+          </div>
+
+          <!-- O‘NG TOMON USTUNI -->
+          <aside class="news-side-column">
+
+            <!-- ENG SO‘NGGI YANGILIKLAR -->
+            <section class="side-news-panel latest-news-panel">
+
+              <h2>
+                <span>🔥</span> Eng so‘nggi yangiliklar
+              </h2>
+
+              <a
+                class="latest-news-item"
+                href="https://lex.uz"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="assets/news/news-gavel.jpg"
+                  alt="Sud bolg‘achasi"
+                  loading="lazy"
+                >
+
+                <span>
+                  <strong>
+                    Oliy sud sud amaliyotiga oid yangi izohlar berdi
+                  </strong>
+                  <small>▦ 26-noyabr, 2026</small>
+                </span>
+
+                <b>›</b>
+              </a>
+
+              <a
+                class="latest-news-item"
+                href="https://www.ohchr.org"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="assets/news/news-un.jpg"
+                  alt="BMT bayrog‘i"
+                  loading="lazy"
+                >
+
+                <span>
+                  <strong>
+                    BMT Inson huquqlari bo‘yicha yangi hisobotini e’lon qildi
+                  </strong>
+                  <small>▦ 25-noyabr, 2026</small>
+                </span>
+
+                <b>›</b>
+              </a>
+
+              <a
+                class="latest-news-item"
+                href="https://eur-lex.europa.eu"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="assets/news/news-books.jpg"
+                  alt="Huquqiy kitoblar"
+                  loading="lazy"
+                >
+
+                <span>
+                  <strong>
+                    Yevropa Ittifoqida sun’iy intellekt bo‘yicha yangi tartib
+                  </strong>
+                  <small>▦ 24-noyabr, 2026</small>
+                </span>
+
+                <b>›</b>
+              </a>
+
+            </section>
+
+           <!-- TELEGRAM OBUNA PANELI -->
+<section class="telegram-news-panel">
+
+  <div class="telegram-panel-title">
+    <span>✈</span>
+    <h2>Huquqiy yangiliklardan xabardor bo‘ling</h2>
+  </div>
+
+  <p>
+    Eng muhim yangiliklar va qonunchilikdagi
+    o‘zgarishlarni birinchi bo‘lib oling.
+  </p>
+
+  <a
+    href="https://t.me/+ov627XZGZ4piNDhi"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <span>➤</span>
+    Telegramda obuna bo‘lish
+  </a>
+
+  <span class="telegram-plane" aria-hidden="true">➤</span>
+
+</section>
+
+            <!-- QONUNCHILIK O‘ZGARISHLARI -->
+            <section class="side-news-panel law-changes-panel">
+
+              <h2>
+                <span>⚖</span> Muhim qonunchilik o‘zgarishlari
+              </h2>
+
+              <ol class="law-change-list">
+
+                <li>
+                  <span>
+                    Fuqarolik kodeksiga o‘zgartirishlar (loyiha)
+                  </span>
+                  <b>Yangi</b>
+                </li>
+
+                <li>
+                  <span>
+                    Raqamli xizmatlar to‘g‘risidagi qonun (loyiha)
+                  </span>
+                  <b>Muhokamada</b>
+                </li>
+
+                <li>
+                  <span>
+                    Mehnat kodeksi: yangi tahrir (tayyorlanmoqda)
+                  </span>
+                  <b>Reja</b>
+                </li>
+
+              </ol>
+            </section>
+
+          </aside>
+        </div>
+
+        <p class="news-demo-footnote">
+          Eslatma: yangilik matnlari va sanalari hozircha dizayn namunasi.
+          Nashrdan oldin rasmiy manbadan tekshiring.
+        </p>
+
+      </section>
+
+      <!-- MENING XARIDLARIM -->
+      <section
+        id="purchases"
+        class="section page-hidden"
+        aria-hidden="true"
+      >
+
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">PREMIUM KUTUBXONA</p>
+            <h2>Mening xaridlarim</h2>
+            <p class="muted">
+              Sotib olingan qo‘llanmalar shu yerda saqlanadi.
+            </p>
+          </div>
+        </div>
+
+        <div class="panel purchase-empty">
+          <div class="purchase-icon">▣</div>
+          <h3>Hozircha xaridlar yo‘q</h3>
+
+          <p class="muted">
+            Premium qo‘llanmalarni sotib olish imkoniyati
+            to‘lov tizimlari xavfsiz integratsiya qilingach
+            ishga tushadi.
+          </p>
+
+          <span class="coming-soon">
+            TO‘LOV TIZIMI TAYYORLANMOQDA
+          </span>
+
+          <a class="secondary-button purchase-guides-link" href="#guides">
+            Qo‘llanmalarga qaytish
+          </a>
+        </div>
+
       </section>
 
       <!-- SOZLAMALAR -->
       <section id="settings" class="section">
+
         <div class="section-heading">
           <h2>⚙️ Sozlamalar</h2>
         </div>
 
-        <div class="panel">
-          <h3>Ma’lumotlarni boshqarish</h3>
-          <p class="muted">
-            Hozirgi vazifalar ushbu brauzerda saqlanadi.
-          </p>
-          <button class="secondary-button" id="exportData">
-            Ma’lumotlarni yuklab olish
-          </button>
+        <div class="panel settings-stack">
+
+          <div class="settings-row">
+            <div>
+              <h3>Ko‘rinish</h3>
+              <p class="muted small">
+                Yorug‘ yoki qorong‘i rejimni tanlang.
+              </p>
+            </div>
+
+            <button
+              class="secondary-button"
+              id="settingsThemeToggle"
+              type="button"
+            >
+              Rang rejimini almashtirish
+            </button>
+          </div>
+
+          <div class="settings-row">
+            <div>
+              <h3>Ma’lumotlarni boshqarish</h3>
+              <p class="muted small">
+                Vazifalar va qo‘llanmalar ma’lumotlarini
+                JSON fayl sifatida yuklab oling.
+              </p>
+            </div>
+
+            <button
+              class="secondary-button"
+              id="exportData"
+              type="button"
+            >
+              Ma’lumotlarni yuklab olish
+            </button>
+          </div>
+
         </div>
       </section>
 
       <!-- YORDAM -->
       <section id="help" class="section">
+
         <div class="section-heading">
           <h2>❔ Yordam</h2>
         </div>
 
         <div class="panel">
           <h3>SEVENED ACADEMY LAW</h3>
+
           <p class="muted">
-            Vazifalaringizni rejalashtiring, qo‘llanmalar yarating
-            va natijalaringizni kuzating.
+            Vazifalaringizni rejalashtiring, qo‘llanmalar yarating,
+            huquqiy yangiliklarni kuzating va natijalaringizni ko‘ring.
           </p>
+
+          <div class="author-credit">
+            <span class="eyebrow">LOYIHA MUALLIFI</span>
+            <h3>Navshodbek Qodirberganov</h3>
+            <p class="muted small">SEVENED ACADEMY asoschisi</p>
+            <strong>Build Your Future.</strong>
+          </div>
         </div>
+
       </section>
 
+      <!-- FOOTER -->
       <footer class="footer">
         <span>SEVENED ACADEMY LAW © 2026</span>
         <span>Build Your Future ⚖️</span>
       </footer>
+
     </main>
-  </div>
-
-  <!-- SHAXSIY PROFIL OYNASI -->
-  <div class="profile-modal hidden" id="profileModal"
-       role="dialog" aria-modal="true"
-       aria-labelledby="profileModalTitle">
-
-    <div class="profile-modal-card">
-      <button class="icon-button profile-modal-close"
-              id="closeProfile" type="button"
-              aria-label="Yopish">✕</button>
-
-      <div class="profile-modal-avatar" data-user-initial>S</div>
-
-      <p class="eyebrow">SEVENED ACADEMY LAW</p>
-      <h2 id="profileModalTitle">Shaxsiy profil</h2>
-      <p class="muted" id="profileEmail">Foydalanuvchi</p>
-
-      <button class="secondary-button profile-logout"
-              id="profileLogout" type="button">
-        Tizimdan chiqish
-      </button>
-    </div>
   </div>
 
   <!-- SUPABASE -->
